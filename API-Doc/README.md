@@ -110,7 +110,7 @@
 }
 ```
 
-## Event Launch API
+## Event Create API
 
 - End Point: `/event/`
 - Method: `POST`
@@ -129,7 +129,7 @@
 | shop_name        | String  | Required    |
 | event_name       | String  | Required    |
 | is_public        | Boolean | Required    |
-| appointment_time | String  | Required    |
+| appointment_time | Object  | Required    |
 | people_limit     | int     | Required    |
 
 - Request Body Example

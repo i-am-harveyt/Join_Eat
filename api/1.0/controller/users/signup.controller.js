@@ -1,6 +1,6 @@
 import signup from "../../model/users/signup.model.js";
 import signJWT from "../../util/jwt/sign.util.js";
-import { ECONNREFUSED, ER_DUP_ENTRY } from "../../util/sqlErr.js";
+import { ECONNREFUSED, ER_DUP_ENTRY } from "../../util/sqlErr.util.js";
 
 /**
  * @param {import('express').Request} req
