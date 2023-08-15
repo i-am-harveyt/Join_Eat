@@ -5,6 +5,7 @@ import api from "./api/1.0/api.js";
 import db from "./api/1.0/model/db.js";
 
 const app = express();
+app.use(express.json());
 const port = process.env.JOIN_EAT_PORT;
 
 app.get("/", (req, res) => {
