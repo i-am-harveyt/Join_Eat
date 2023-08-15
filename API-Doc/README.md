@@ -110,9 +110,9 @@
 }
 ```
 
-## Event Launch API
+## Event Create API
 
-- End Point: `/event/`
+- End Point: `/events/`
 - Method: `POST`
 - Request Headers:
 
@@ -129,7 +129,7 @@
 | shop_name        | String  | Required    |
 | event_name       | String  | Required    |
 | is_public        | Boolean | Required    |
-| appointment_time | String  | Required    |
+| appointment_time | Object  | Required    |
 | people_limit     | int     | Required    |
 
 - Request Body Example
@@ -141,7 +141,13 @@
   "shop_name": "八方雲集新生仁愛店",
   "event_name": "嘗試新出的牛肉麵！",
   "is_public": true,
-  "appointment_time": "2023-08-15 11:40:00",
+  "appointment_time": {
+    "year": 2023,
+    "month": 8,
+    "date": 15,
+    "hour": 18,
+    "minute": 30
+  },
   "people_limit": 6
 }
 ```
@@ -245,7 +251,7 @@
 
 ## Event Join API
 
-- End Point: `/event/:event_id/join`
+- End Point: `/events/:event_id/join`
 - Method: `POST`
 - Request Headers:
 
@@ -282,7 +288,7 @@
 
 ## Event Quit API
 
-- End Point: `/event/:event_id/quit`
+- End Point: `/events/:event_id/quit`
 - Method: `POST`
 - Request Headers:
 
@@ -319,7 +325,7 @@
 
 ## Event Search API
 
-- End Point: `/event/search`
+- End Point: `/events/search`
 - Method: `GET`
 - Request Header;
 

@@ -1,7 +1,7 @@
 import db from "../db.js";
 
 const query = `
-SELECT id, name, password, self_introduction, tags
+SELECT id, name, password, introduction, tags
 FROM users
 WHERE email=?
 `;

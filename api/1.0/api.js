@@ -1,6 +1,6 @@
 import { Router } from "express";
-import users from "./routes/users.route.js"
-import events from "./routes/events.route.js"
+import users from "./routes/users.route.js";
+import events from "./routes/events.route.js";
 
 const api = Router();
 

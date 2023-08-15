@@ -1,17 +1,15 @@
 import { Router } from "express";
 import asyncWrapper from "../util/asyncWrapper.util.js";
-//import signupHandler from "../controller/users/signup.controller.js";
-//import signinHandler from "../controller/users/signin.controller.js";
+import eventCreateHandler from "../controller/events/create.controller.js";
 
 const events = Router();
 
 events.get("/", (req, res) => {
-  res.status(200).json({
-    message: "users api",
-  });
+	res.status(200).json({
+		message: "Events API",
+	});
 });
 
-events.post("/signup", asyncWrapper(signupHandler));
-events.post("/signin", asyncWrapper(signinHandler));
+events.post("/", asyncWrapper(eventCreateHandler));
 
-export default users;
+export default events;

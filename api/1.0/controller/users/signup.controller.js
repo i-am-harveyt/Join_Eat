@@ -1,6 +1,6 @@
 import signup from "../../model/users/signup.model.js";
 import signJWT from "../../util/jwt/sign.util.js";
-import { ECONNREFUSED, ER_DUP_ENTRY } from "../../util/sqlErr.js";
+import { ECONNREFUSED, ER_DUP_ENTRY } from "../../util/sqlErr.util.js";
 
 /**
  * @param {import('express').Request} req
@@ -33,7 +33,7 @@ export default async function signupHandler(req, res, next) {
       user: {
         id: insertId,
 				name: name,
-				self_introduction: null,
+				introduction: null,
 				tags: null,
       },
     },
