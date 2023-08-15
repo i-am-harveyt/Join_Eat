@@ -1,7 +1,7 @@
 import { compareSync } from "bcrypt";
 import signin from "../../model/users/signin.model.js";
 import signJWT from "../../util/jwt/sign.util.js";
-import { ECONNREFUSED } from "../../util/sqlErr.js";
+import { ECONNREFUSED } from "../../util/sqlErr.util.js";
 
 /**
  * @param {import('express').Request} req
