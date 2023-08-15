@@ -33,7 +33,7 @@ export default async function signupHandler(req, res, next) {
       user: {
         id: insertId,
 				name: name,
-				self_introduction: null,
+				introduction: null,
 				tags: null,
       },
     },
