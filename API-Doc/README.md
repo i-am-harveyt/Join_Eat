@@ -91,7 +91,7 @@
   "data": {
     "access_token": "some_token",
     "user": {
-      "user_id": 10,
+      "user_id": "101010101010101010",
       "name": "Test",
       "email": "test@test.com"
     }
@@ -163,7 +163,7 @@
 ```json
 {
   "data": {
-    "event_id": 10
+    "event_id": "010101010101010"
   }
 }
 ```
@@ -216,7 +216,7 @@
   "data": {
     "events": [
       {
-        "event_id": 10,
+        "event_id": "121212121212212121212",
         "name": "來嘗試新出的牛肉麵吧！",
         "shop_name": "八方雲集新生仁愛店",
         "latitude": 25.0388368,
@@ -226,7 +226,7 @@
         "distance": 0.0
       },
       {
-        "event_id": 12,
+        "event_id": "21212121212121",
         "name": "麥噹噹 YYDS",
         "shop_name": "麥當勞-台北濟南餐廳",
         "latitude": 25.0400737,
@@ -271,7 +271,7 @@
 {
   "data": {
     "event": {
-      "event_id": 10
+      "event_id": "1212121212121212"
     }
   }
 }
@@ -308,7 +308,7 @@
 {
   "data": {
     "event": {
-      "event_id": 10
+      "event_id": "111111111"
     }
   }
 }
@@ -356,7 +356,7 @@
   "data": {
     "events": [
       {
-        "event_id": 5,
+        "event_id": "111111111",
         "name": "沒人可以打敗麥噹噹",
         "shop_name": "某家麥當勞",
         "latitude": 25.0388368,
@@ -366,7 +366,7 @@
         "distance": 0.0
       },
       {
-        "event_id": 12,
+        "event_id": "222222222",
         "name": "麥噹噹 YYDS",
         "shop_name": "麥當勞-台北濟南餐廳",
         "latitude": 25.0400737,
@@ -422,7 +422,7 @@
   "data": {
     "events": [
       {
-        "event_id": 1,
+        "event_id": "111111111",
         "name": "吃一波",
         "shop_name": "麥當勞-台北濟南餐廳",
         "latitude": 25.0388368,
@@ -432,7 +432,7 @@
         "distance": 0.0
       },
       {
-        "event_id": 12,
+        "event_id": "222222222",
         "name": "麥噹噹 YYDS",
         "shop_name": "麥當勞-台北濟南餐廳",
         "latitude": 25.0400737,
