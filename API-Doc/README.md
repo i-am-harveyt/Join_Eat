@@ -163,7 +163,62 @@
 ```json
 {
   "data": {
-    "event_id": 10
+    "event": {
+      "event_id": 10
+    }
+  }
+}
+```
+
+- Client Error Response: 400
+- Server Error Response: 500
+
+| Field | Type   | Description   |
+| ----- | ------ | ------------- |
+| error | String | Error Message |
+
+- Error Example
+
+```json
+{
+  "error": "message"
+}
+```
+
+## Event Delete API
+
+- End Point: `/events/:events_id`
+- Method: `DELETE`
+- Request Headers:
+
+| Field        | Type   | Description                     |
+| ------------ | ------ | ------------------------------- |
+| Content-Type | String | Only accept `application/json`. |
+
+- Parameters
+
+| Field        | Type   | Description |
+| ------------ | ------ | ----------- |
+| event_id     | Number | Event's id  |
+
+- Request Body Example
+
+`http://[HOST_NAME]/api/[API_VERSION]/events/10`
+
+- Success Response: 200
+
+| Field    | Type   | Description      |
+| -------- | ------ | ---------------- |
+| event_id | Object | User information |
+
+- Success Response Example:
+
+```json
+{
+  "data": {
+    "event": {
+      "event_id": 10
+    }
   }
 }
 ```
@@ -454,3 +509,73 @@
 | Field | Type   | Description   |
 | ----- | ------ | ------------- |
 | error | String | Error message |
+
+## Event Detail API
+- End Point: `/events/events_id`
+- Method: `GET`
+
+- Request Header;
+
+| Field         | Type   | Description                                                   |
+| ------------- | ------ | ------------------------------------------------------------- |
+| Authorization | String | Access token preceding `Bearer` . For example: `Bearer token` |
+
+Request Example: `http://[HOST_NAME]/api/[API_VERSION]/events/1`
+
+- Success Response: 200
+
+| Field  | Type                    | Description                             |
+| ------ | ----------------------- | --------------------------------------- |
+| events | Array of `event Object` | List of Events that fit in the keywords |
+
+- Success Response Example:
+
+```json
+{
+  "data": {
+    "event":{
+      "event_id": 1,
+      "name": "吃一波",
+      "shop_name": "麥當勞-台北濟南餐廳",
+      "latitude": 25.0388368,
+      "longitude": 121.5325665,
+      "people_limit": 6,
+      "people_num": 2,
+      "distance": 0.0,
+      "participants": [
+        {
+          "id": "1",
+          "name": "PJ",
+          "picture": ""
+        },
+        {
+          "id": "2",
+          "name": "抽抽",
+          "picture": ""
+        }
+      ]
+    }
+  }
+}
+```
+
+- Client Error Response(no token): 401
+- Client Error Response(wrong token): 403
+- Client Error Response: 400
+- Server Error Response: 500
+
+| Field | Type   | Description   |
+| ----- | ------ | ------------- |
+| error | String | Error message |
+
+## User Profile API
+## User's Profile Update API
+## User's Picture Update API
+
+## Friends API
+## Friends Pending API
+## Friends Request API
+## Friends Agree API
+## Delete Friend API
+ 
+## Events Query Friendship
