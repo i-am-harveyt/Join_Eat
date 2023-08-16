@@ -2,8 +2,8 @@ import { genSaltSync, hashSync } from "bcrypt";
 import db from "../db.js";
 
 const query = `
-INSERT INTO users (name, email, password)
-VALUES (?, ?, ?);
+INSERT INTO users (id, name, email, password)
+VALUES (UUID_TO_BIN(UUID()), ?, ?, ?);
 `;
 /**
  * @param {string} email

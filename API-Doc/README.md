@@ -460,6 +460,13 @@
 | ------- | ------ | ------------------- |
 | keyword | String | Keyword of the shop |
 
+- Request Body:
+
+| Field     | Type  | Description |
+| --------- | ----- | ----------- |
+| latitude  | float | required    |
+| longitude | float | required    |
+
 - Request Example:
 
 - Request Example: `https://[HOST_NAME]/api/[API_VERSION]/shop/search?keyword=麥當勞-台北濟南餐廳`
@@ -484,14 +491,14 @@
         "longitude": 121.5325665,
         "people_limit": 6,
         "people_num": 6,
-        "distance": 0.0
+        "distance": 502.3
       },
       {
         "event_id": "222222222",
         "name": "麥噹噹 YYDS",
         "shop_name": "麥當勞-台北濟南餐廳",
-        "latitude": 25.0400737,
-        "longitude": 121.53261,
+        "latitude": 25.0388368,
+        "longitude": 121.5325665,
         "people_limit": 4,
         "people_num": 2,
         "distance": 502.3

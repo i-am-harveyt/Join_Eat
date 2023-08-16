@@ -1,7 +1,7 @@
 import db from "../db.js";
 const query = `
-INSERT INTO events (host_id, name, shop_name, latitude, longitude, is_public, appointment_time, people_limit)
-VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+INSERT INTO events (id, host_id, name, shop_name, latitude, longitude, is_public, appointment_time, people_limit)
+VALUES (UUID_TO_BIN(UUID()), ?, ?, ?, ?, ?, ?, ?, ?)
 `;
 
 /**

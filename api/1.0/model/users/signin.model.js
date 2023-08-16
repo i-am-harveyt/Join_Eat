@@ -1,7 +1,7 @@
 import db from "../db.js";
 
 const query = `
-SELECT id, name, password, introduction, tags
+SELECT BIN_TO_UUID(id) AS id, name, password, introduction, tags
 FROM users
 WHERE email=?
 `;
