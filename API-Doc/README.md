@@ -252,10 +252,10 @@
 
 | Field     | Type   | Description |
 | --------- | ------ | ----------- |
-| latitude  | Number | required    |
-| longitude | Number | required    |
+| lat | Number | required    |
+| lon | Number | required    |
 
-- Request Example: `https://[HOST_NAME]/api/[API_VERSION]/events?latitude=25.0388368&longitude=121.5325665`
+- Request Example: `https://[HOST_NAME]/api/[API_VERSION]/events?lat=25.0388368&lon=121.5325665`
 
 - Success Response: 200
 
@@ -390,13 +390,14 @@
 
 - Request Parameters:
 
-| Field   | Type   | Description                                                             |
-| ------- | ------ | ----------------------------------------------------------------------- |
-| keyword | String | If the keyword had a `0E` then it is `event_id`, otherwise `event_name` |
+| Field     | Type   | Description                                                             |
+| --------- | ------ | ----------------------------------------------------------------------- |
+| keyword   | String | If the keyword had a `0E` then it is `event_id`, otherwise `event_name` |
+| lat | Number | required    |
+| lon | Number | required    |
 
-- Request Example:
 
-- Request Example: `https://[HOST_NAME]/api/[API_VERSION]/event/search?keyword=0E10`, `https://[HOST_NAME]/api/[API_VERSION]/event/search?keyword=麥噹噹`
+- Request Example: `https://[HOST_NAME]/api/[API_VERSION]/event/search?keyword=0E10&lat=25.0388368&lon=121.5325665`, `https://[HOST_NAME]/api/[API_VERSION]/event/search?keyword=麥噹噹&lat=25.0388368&lon=121.5325665`
 
 - Success Response: 200
 
@@ -458,11 +459,24 @@
 
 | Field   | Type   | Description         |
 | ------- | ------ | ------------------- |
-| keyword | String | Keyword of the shop |
+| lat     | Number | required    |
+| lon     | Number | required    |
 
+- Request Body:
+| Field     | Type   | Description         |
+| -------   | ------ | ------------------- |
+| latitude  | Number | required    |
+| longitude | Number | required    |
 - Request Example:
 
-- Request Example: `https://[HOST_NAME]/api/[API_VERSION]/shop/search?keyword=麥當勞-台北濟南餐廳`
+- Request Example: `https://[HOST_NAME]/api/[API_VERSION]/shop/search?keyword=麥當勞-台北濟南餐廳&lat=25.0388368&lon=121.5325665`
+
+```json
+{
+    "latitude":26.038846,
+    "longitude":121.532598
+}
+```
 
 - Success Response: 200
 
