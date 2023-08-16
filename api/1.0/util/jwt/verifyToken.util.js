@@ -1,4 +1,4 @@
-import verifyJWT from "../../util/jwt/verify.util.js";
+import verifyJWT from "./verify.util.js";
 
 /**
  * @param {import('express').Request} req

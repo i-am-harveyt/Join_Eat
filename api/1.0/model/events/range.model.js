@@ -11,13 +11,13 @@ ORDER BY distance
 
 
 /**
- * @param {number} lat
- * @param {number} lon
+ * @param {number} latitude
+ * @param {number} longitude
  */
-export default async function getNearbyEvents(lat, lon) {
-  const param = [lon, lat]; // Note: longitude comes before latitude
+export default async function getNearbyEvents(latitude, longitude) {
+  const params = [longitude, latitude]; // Note: longitude comes before latitude
   try {
-    const [rows] = await db.execute(rangeQuery, param);
+    const [rows] = await db.execute(rangeQuery, params);
     return rows;
   } catch (err) {
     throw err;

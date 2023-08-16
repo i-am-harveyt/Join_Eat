@@ -10,13 +10,13 @@ WHERE status=FALSE AND (name LIKE ? OR id=?)
 
 /**
  * @param {string} keyword
- * @param {number} lat
- * @param {number} lon
+ * @param {number} latitude
+ * @param {number} longitude
  */
-export default async function searchEvents(keyword, lat, lon) {
-  const param = [lon, lat, `%${keyword}%`, keyword]; // Matching keyword as event name or event ID
+export default async function searchEvents(keyword, latitude, longitude) {
+  const params = [longitude, latitude, `%${keyword}%`, keyword]; // Matching keyword as event name or event ID
   try {
-    const [rows] = await db.execute(searchQuery, param);
+    const [rows] = await db.execute(searchQuery, params);
     return rows;
   } catch (err) {
     throw err;

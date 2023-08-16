@@ -6,14 +6,14 @@ import getNearbyEvents from "../../model/events/range.model.js";
  * @param {import('express').NextFunction} next
  */
 export default async function rangeQueryHandler(req, res, next) {
-  const { lat, lon } = req.query;
+  const { latitude, longitude } = req.query;
 
-  if (!(lat && lon)) {
+  if (!(latitude && longitude)) {
     return res.status(400).json({ error: "Missing Required Input" });
   }
 
   try {
-    const nearbyEvents = await getNearbyEvents(lat, lon);
+    const nearbyEvents = await getNearbyEvents(latitude, longitude);
 
     res.status(200).json({
       data: {

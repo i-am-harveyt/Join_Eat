@@ -9,15 +9,15 @@ WHERE longitude=? AND latitude=?;
 `;
 
 /**
+ * @param {number} shop_latitude
+ * @param {number} shop_longitude
  * @param {number} latitude
  * @param {number} longitude
- * @param {number} lat
- * @param {number} lon
  */
-export default async function searchEvents(lat, lon, latitude, longitude) {
-  const param = [lon, lat, longitude, latitude, longitude, latitude];
+export default async function searchEvents(latitude, longitude, shop_latitude, shop_longitude) {
+  const params = [longitude, latitude, shop_longitude, shop_latitude, shop_longitude, shop_latitude];
   try {
-    const [rows] = await db.execute(searchQuery, param);
+    const [rows] = await db.execute(searchQuery, params);
     return rows;
   } catch (err) {
     throw err;

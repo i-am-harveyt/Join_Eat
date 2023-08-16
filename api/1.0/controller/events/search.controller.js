@@ -6,14 +6,14 @@ import searchEvents from "../../model/events/search.model.js";
  * @param {import('express').NextFunction} next
  */
 export default async function searchEventHandler(req, res, next) {
-  const { keyword, lat, lon } = req.query;
+  const { keyword, latitude, longitude } = req.query;
 
-  if (!(keyword && lat && lon)) {
+  if (!(keyword && latitude && longitude)) {
     return res.status(400).json({ error: "Missing Required Input" });
   }
 
   try {
-    const events = await searchEvents(keyword, lat, lon);
+    const events = await searchEvents(keyword, latitude, longitude);
 
     res.status(200).json({
       data: {

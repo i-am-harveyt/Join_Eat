@@ -1,6 +1,6 @@
 import { Router } from "express";
 import asyncWrapper from "../util/asyncWrapper.util.js";
-import verifyTokenHandler from "../controller/users/verifyToken.controller.js";
+import verifyTokenHandler from "../util/jwt/verifyToken.util.js";
 import eventCreateHandler from "../controller/events/create.controller.js";
 import rangeQueryHandler from "../controller/events/range.controller.js"
 import searchEventHandler from "../controller/events/search.controller.js"
