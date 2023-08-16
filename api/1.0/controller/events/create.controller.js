@@ -1,3 +1,4 @@
+import crypto from "crypto"
 import eventCreate from "../../model/events/create.model.js";
 import verifyJWT from "../../util/jwt/verify.util.js";
 import { ECONNREFUSED } from "../../util/sqlErr.util.js";
@@ -8,10 +9,10 @@ import { ECONNREFUSED } from "../../util/sqlErr.util.js";
  * @param {import('express').NextFunction} next
  */
 export default async function eventCreateHandler(req, res, next) {
-	let user_id = 0;
+	let userId = 0;
 	try {
 		const result = verifyJWT(req.headers.authorization);
-		user_id = result.user_id
+		userId = result.user_id;
 	} catch (err) {
 		return res.status(403).json({ error: "Wrong Token" });
 	}
@@ -19,22 +20,25 @@ export default async function eventCreateHandler(req, res, next) {
 	const data = checkBody(req);
 	if (!data) return res.status(400).json({ error: "Missing required data!" });
 
-	let insertId = 0;
+	const uuid = crypto.randomUUID();
 	try {
-		const [result] = await eventCreate({ host_id: user_id, ...data });
-		insertId = result.insertId;
+		await eventCreate({
+			event_id: uuid,
+			host_id: userId,
+			...data,
+		});
 	} catch (err) {
 		switch (err.errno) {
 			case ECONNREFUSED.errno:
 				return res.status(500).json({ error: ECONNREFUSED.message });
 			default:
-				return res.status(400).json({ error: err});
+				return res.status(400).json({ error: err });
 		}
 	}
 
 	return res.status(200).json({
 		data: {
-			event_id: insertId,
+			event_id: uuid,
 		},
 	});
 }

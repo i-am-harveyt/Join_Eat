@@ -10,10 +10,11 @@ latitude,
 longitude,
 appointment_time,
 people_limit)
-VALUES (UUID_TO_BIN(UUID()), ?, ?, ?, ?, ?, ?, ?, ?)
+VALUES (UUID_TO_BIN(?), UUID_TO_BIN(?), ?, ?, ?, ?, ?, ?, ?);
 `;
 
 /**
+ * @param {number} event_id: should be a uuid
  * @param {number} host_id
  * @param {string} event_name
  * @param {string} shop_name
@@ -24,30 +25,31 @@ VALUES (UUID_TO_BIN(UUID()), ?, ?, ?, ?, ?, ?, ?, ?)
  * @param {String} appointment_time
  */
 export default async function eventCreate({
-  host_id,
-  event_name,
-  shop_name,
-  is_public,
-  latitude,
-  longitude,
-  appointment_time,
-  people_limit,
+	event_id,
+	host_id,
+	event_name,
+	shop_name,
+	is_public,
+	latitude,
+	longitude,
+	appointment_time,
+	people_limit,
 }) {
-  const params = [
-    host_id,
-    event_name,
-    shop_name,
+	const params = [
+		event_id,
+		host_id,
+		event_name,
+		shop_name,
 		is_public,
-    latitude,
-    longitude,
-    appointment_time,
-    people_limit,
-  ];
-  console.log(params);
+		latitude,
+		longitude,
+		appointment_time,
+		people_limit,
+	];
 
-  try {
-    return await db.execute(query, params);
-  } catch (err) {
-    throw err;
-  }
+	try {
+		return await db.execute(query, params);
+	} catch (err) {
+		throw err;
+	}
 }
