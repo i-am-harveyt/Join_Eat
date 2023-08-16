@@ -28,7 +28,7 @@ export default async function eventCreateHandler(req, res, next) {
 			case ECONNREFUSED.errno:
 				return res.status(500).json({ error: ECONNREFUSED.message });
 			default:
-				break;
+				return res.status(400).json({ error: err});
 		}
 	}
 
