@@ -26,7 +26,6 @@ CREATE TABLE IF NOT EXISTS `events` (
 	`people_limit` int NOT NULL DEFAULT 1,
 	`people_joined` int NOT NULL DEFAULT 1,
   `status` boolean DEFAULT FALSE,
-	PRIMARY KEY (`id`),
 	FOREIGN KEY(`host_id`) REFERENCES `users`(`id`) ON DELETE CASCADE
 );
 
@@ -51,3 +50,5 @@ BEGIN
     END IF;
 END;
 //DELIMITER ;
+
+
