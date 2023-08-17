@@ -24,7 +24,6 @@ export default async function eventCreateHandler(req, res, next) {
 		const [result] = await eventCreate({ host_id: user_id, ...data });
 		insertId = result.insertId;
 	} catch (err) {
-		console.log(err);
 		switch (err.errno) {
 			case ECONNREFUSED.errno:
 				return res.status(500).json({ error: ECONNREFUSED.message });

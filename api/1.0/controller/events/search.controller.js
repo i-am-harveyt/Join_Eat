@@ -17,9 +17,7 @@ export default async function searchEventHandler(req, res, next) {
     const searchEvents = await getSearchEvents(keyword, latitude, longitude);
     const events = searchEvents.map(event => {
       const { appointment_time, ...eventWithoutTime } = event;
-      console.log("before:", appointment_time);
       const time = transformTimeFormat(appointment_time);
-      console.log("after:", time);
       return {
         ...eventWithoutTime,
         "appointment_time": time
