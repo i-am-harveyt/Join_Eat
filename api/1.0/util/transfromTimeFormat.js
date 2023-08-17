@@ -4,10 +4,9 @@
 
 export default function transformTimeFormat(stringTime) {
   const time = new Date(stringTime);
-  console.log(time.getMonth())
   return {
      "year": time.getFullYear(),
-     "month": time.getMonth(),
+     "month": time.getMonth() + 1,
      "date": time.getDate(),
      "hour": time.getHours(),
      "minute": time.getMinutes()
