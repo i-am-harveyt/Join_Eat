@@ -1,6 +1,6 @@
 import db from "../db.js";
 const query = `
-INSERT INTO events (host_id, name, shop_name, latitude, longitude, is_public, appointment_time, people_limit)
+INSERT INTO events (host_id, name, shop_name, is_public, latitude, longitude, appointment_time, people_limit)
 VALUES (?, ?, ?, ?, ?, ?, ?, ?)
 `;
 

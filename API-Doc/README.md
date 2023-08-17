@@ -22,7 +22,7 @@
 
 ```json
 {
-  "name": "test-1"
+  "name": "test-1",
   "email": "test-1@test.com",
   "password": "test",
 }
@@ -278,7 +278,14 @@
         "longitude": 121.5325665,
         "people_limit": 6,
         "people_num": 6,
-        "distance": 0.0
+        "distance": 0.0,
+        "appointment_time": {
+          "year": 2023,
+          "month": 8,
+          "date": 15,
+          "hour": 18,
+          "minute": 30
+        }
       },
       {
         "event_id": 12,
@@ -288,7 +295,14 @@
         "longitude": 121.53261,
         "people_limit": 4,
         "people_num": 2,
-        "distance": 502.3
+        "distance": 502.3,
+        "appointment_time": {
+          "year": 2023,
+          "month": 8,
+          "date": 15,
+          "hour": 18,
+          "minute": 30
+        }
       }
     ]
   }
@@ -390,13 +404,14 @@
 
 - Request Parameters:
 
-| Field   | Type   | Description                                                             |
-| ------- | ------ | ----------------------------------------------------------------------- |
-| keyword | String | If the keyword had a `0E` then it is `event_id`, otherwise `event_name` |
+| Field     | Type   | Description                                                             |
+| --------- | ------ | ----------------------------------------------------------------------- |
+| keyword   | String | If the keyword had a `0E` then it is `event_id`, otherwise `event_name` |
+| latitude  | Number | required    |
+| longitude | Number | required    |
 
-- Request Example:
 
-- Request Example: `https://[HOST_NAME]/api/[API_VERSION]/event/search?keyword=0E10`, `https://[HOST_NAME]/api/[API_VERSION]/event/search?keyword=麥噹噹`
+- Request Example: `https://[HOST_NAME]/api/[API_VERSION]/event/search?keyword=0E10&latitude=25.0388368&longitude=121.5325665`, `https://[HOST_NAME]/api/[API_VERSION]/event/search?keyword=麥噹噹&latitude=25.0388368&longitude=121.5325665`
 
 - Success Response: 200
 
@@ -418,7 +433,14 @@
         "longitude": 121.5325665,
         "people_limit": 6,
         "people_num": 6,
-        "distance": 0.0
+        "distance": 0.0,
+        "appointment_time": {
+          "year": 2023,
+          "month": 8,
+          "date": 15,
+          "hour": 18,
+          "minute": 30
+        }
       },
       {
         "event_id": 12,
@@ -428,7 +450,14 @@
         "longitude": 121.53261,
         "people_limit": 4,
         "people_num": 2,
-        "distance": 502.3
+        "distance": 502.3,
+        "appointment_time": {
+          "year": 2023,
+          "month": 8,
+          "date": 15,
+          "hour": 18,
+          "minute": 30
+        }
       }
     ]
   }
@@ -458,11 +487,25 @@
 
 | Field   | Type   | Description         |
 | ------- | ------ | ------------------- |
-| keyword | String | Keyword of the shop |
+| latitude  | Number | required    |
+| longitude | Number | required    |
 
-- Request Example:
+- Request Example: `https://[HOST_NAME]/api/[API_VERSION]/shop/search?&latitude=25.0388368&longitude=121.5325665`
 
-- Request Example: `https://[HOST_NAME]/api/[API_VERSION]/shop/search?keyword=麥當勞-台北濟南餐廳`
+
+- Request Body:
+
+| Field     | Type   | Description       |
+| --------- | ------ | ----------------- |
+| latitude  | Number | shop's latiude    |
+| longitude | Number | shop's longtiude  |
+
+```json
+{
+    "latitude":26.038846,
+    "longitude":121.532598
+}
+```
 
 - Success Response: 200
 
@@ -484,7 +527,14 @@
         "longitude": 121.5325665,
         "people_limit": 6,
         "people_num": 6,
-        "distance": 0.0
+        "distance": 0.0,
+        "appointment_time": {
+          "year": 2023,
+          "month": 8,
+          "date": 15,
+          "hour": 18,
+          "minute": 30
+        }
       },
       {
         "event_id": 12,
@@ -494,7 +544,14 @@
         "longitude": 121.53261,
         "people_limit": 4,
         "people_num": 2,
-        "distance": 502.3
+        "distance": 502.3,
+        "appointment_time": {
+          "year": 2023,
+          "month": 8,
+          "date": 15,
+          "hour": 18,
+          "minute": 30
+        }
       }
     ]
   }
@@ -534,6 +591,7 @@ Request Example: `http://[HOST_NAME]/api/[API_VERSION]/events/1`
 {
   "data": {
     "event":{
+      "host_id": 1,
       "event_id": 1,
       "name": "吃一波",
       "shop_name": "麥當勞-台北濟南餐廳",
@@ -542,6 +600,13 @@ Request Example: `http://[HOST_NAME]/api/[API_VERSION]/events/1`
       "people_limit": 6,
       "people_num": 2,
       "distance": 0.0,
+      "appointment_time": {
+        "year": 2023,
+        "month": 8,
+        "date": 15,
+        "hour": 18,
+        "minute": 30
+      },
       "participants": [
         {
           "id": "1",
