@@ -8,7 +8,7 @@ VALUES (UUID_TO_BIN(?), UUID_TO_BIN(?), UUID_TO_BIN(?), ?)
 const updateQuery = `
 UPDATE events
 SET people_joined = people_joined + 1
-WHERE event_id=UUID_TO_BIN(?)
+WHERE id=UUID_TO_BIN(?)
 `;
 /**
  * @param {string} uuid
@@ -22,8 +22,8 @@ export default async function eventJoin(uuid, userId, eventId) {
   const connection = await db.getConnection();
   try {
     await connection.beginTransaction();
-    await connection.execute(insertQuery, insertParams);
     await connection.execute(updateQuery, updateParam);
+    await connection.execute(insertQuery, insertParams);
     await connection.commit();
   } catch (err) {
     await connection.rollback();

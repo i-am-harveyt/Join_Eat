@@ -40,7 +40,7 @@ CREATE TABLE IF NOT EXISTS `participants` (
 	FOREIGN KEY(`event_id`) REFERENCES `events`(`id`) ON DELETE CASCADE
 );
 
---DELIMITER
+DELIMITER //
 CREATE TRIGGER check_people_limit
 BEFORE UPDATE ON events
 FOR EACH ROW
@@ -50,3 +50,4 @@ BEGIN
             SET MESSAGE_TEXT = 'People joined will exceed people limit';
     END IF;
 END;
+//DELIMITER ;

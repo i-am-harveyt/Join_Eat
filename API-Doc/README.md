@@ -187,7 +187,7 @@
 
 ## Event Delete API
 
-- End Point: `/events/:events_id`
+- End Point: `/events/:event_id`
 - Method: `DELETE`
 - Request Headers:
 
@@ -574,7 +574,7 @@
 
 ## Event Detail API
 
-- End Point: `/events/events_id`
+- End Point: `/events/:event_id`
 - Method: `GET`
 
 - Request Header;
