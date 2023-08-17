@@ -13,8 +13,6 @@ AND (event_id) IN (
  * @param {number} userId
  */
 export default async function eventQuit(eventId, userId) {
-	console.log(eventId);
-	console.log(userId);
 	if (!(userId && eventId)) return false;
 
 	const params = [eventId, userId, eventId, userId];

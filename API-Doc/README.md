@@ -596,7 +596,7 @@ Request Example: `http://[HOST_NAME]/api/[API_VERSION]/events/1`
 ```json
 {
   "data": {
-    "event":{
+    "event": {
       "host_id": 1,
       "event_id": 1,
       "name": "吃一波",
@@ -613,6 +613,7 @@ Request Example: `http://[HOST_NAME]/api/[API_VERSION]/events/1`
         "hour": 18,
         "minute": 30
       },
+      "is_joined": true,
       "participants": [
         {
           "id": "1",
