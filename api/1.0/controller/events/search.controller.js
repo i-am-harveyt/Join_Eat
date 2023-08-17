@@ -1,5 +1,5 @@
 import getSearchEvents from "../../model/events/search.model.js";
-import transformTimeFormat from "../../util/transfromTimeFormat.js";
+import transformTimeFormat from "../../util/transfromTimeFormat.util.js";
 import { ECONNREFUSED } from "../../util/sqlErr.util.js";
 /**
  * @param {import('express').Request} req

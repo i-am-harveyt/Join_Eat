@@ -1,5 +1,5 @@
 import getNearbyEvents from "../../model/events/range.model.js";
-import transformTimeFormat from "../../util/transfromTimeFormat.js";
+import transformTimeFormat from "../../util/transfromTimeFormat.util.js";
 /**
  * @param {import('express').Request} req
  * @param {import('express').Response} res
