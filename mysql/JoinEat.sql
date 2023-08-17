@@ -19,12 +19,14 @@ CREATE TABLE IF NOT EXISTS `events` (
 	`name` varchar(255) DEFAULT '',
 	`shop_name` varchar(255) DEFAULT '',
 	`is_public` boolean NOT NULL DEFAULT FALSE,
-	`latitude` decimal NOT NULL DEFAULT 0,
-	`longitude` decimal NOT NULL DEFAULT 0,
+  `latitude` decimal(9, 6) NOT NULL DEFAULT 0,
+  `longitude` decimal(9, 6) NOT NULL DEFAULT 0,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `appointment_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
 	`people_limit` int NOT NULL DEFAULT 1,
 	`people_joined` int NOT NULL DEFAULT 1,
+  `status` boolean DEFAULT FALSE,
+	PRIMARY KEY (`id`),
 	FOREIGN KEY(`host_id`) REFERENCES `users`(`id`) ON DELETE CASCADE
 );
 
@@ -37,3 +39,14 @@ CREATE TABLE IF NOT EXISTS `participants` (
 	FOREIGN KEY(`user_id`) REFERENCES `users`(`id`) ON DELETE CASCADE,
 	FOREIGN KEY(`event_id`) REFERENCES `events`(`id`) ON DELETE CASCADE
 );
+
+--DELIMITER
+CREATE TRIGGER check_people_limit
+BEFORE UPDATE ON events
+FOR EACH ROW
+BEGIN
+    IF NEW.people_joined + 1 > NEW.people_limit THEN
+        SIGNAL SQLSTATE '45000'
+            SET MESSAGE_TEXT = 'People joined will exceed people limit';
+    END IF;
+END;
