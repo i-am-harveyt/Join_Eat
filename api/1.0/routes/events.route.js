@@ -8,6 +8,7 @@ import rangeQueryHandler from "../controller/events/range.controller.js";
 import searchEventHandler from "../controller/events/search.controller.js";
 import rangeShopHandler from "../controller/events/rangeShop.controller.js";
 import eventDetailHandler from "../controller/events/detail.controller.js";
+import eventDeleteHandler from "../controller/events/delete.controller.js";
 
 const events = Router();
 
@@ -19,6 +20,7 @@ events.get("/search", asyncWrapper(searchEventHandler));
 events.get("/shop", asyncWrapper(rangeShopHandler));
 events.post("/:event_id/join", asyncWrapper(eventJoinHandler));
 events.post("/:event_id/quit", asyncWrapper(eventQuitHandler));
+events.delete("/:event_id", asyncWrapper(eventDeleteHandler));
 events.get("/:event_id", asyncWrapper(eventDetailHandler));
 
 export default events;

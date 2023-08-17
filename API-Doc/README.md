@@ -116,9 +116,10 @@
 - Method: `POST`
 - Request Headers:
 
-| Field        | Type   | Description                     |
-| ------------ | ------ | ------------------------------- |
-| Content-Type | String | Only accept `application/json`. |
+| Field         | Type   | Description                                                   |
+| ------------- | ------ | ------------------------------------------------------------- |
+| Content-Type  | String | Only accept `application/json`.                               |
+| Authorization | String | Access token preceding `Bearer` . For example: `Bearer token` |
 
 - Request Body:
 
