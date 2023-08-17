@@ -591,6 +591,7 @@ Request Example: `http://[HOST_NAME]/api/[API_VERSION]/events/1`
 {
   "data": {
     "event":{
+      "host_id": 1,
       "event_id": 1,
       "name": "吃一波",
       "shop_name": "麥當勞-台北濟南餐廳",

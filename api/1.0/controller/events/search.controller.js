@@ -1,5 +1,6 @@
-import searchEvents from "../../model/events/search.model.js";
-
+import getSearchEvents from "../../model/events/search.model.js";
+import transformTimeFormat from "../../util/transfromTimeFormat.js";
+import { ECONNREFUSED } from "../../util/sqlErr.util.js";
 /**
  * @param {import('express').Request} req
  * @param {import('express').Response} res
@@ -13,8 +14,18 @@ export default async function searchEventHandler(req, res, next) {
   }
 
   try {
-    const events = await searchEvents(keyword, latitude, longitude);
-
+    const searchEvents = await getSearchEvents(keyword, latitude, longitude);
+    const events = searchEvents.map(event => {
+      const { appointment_time, ...eventWithoutTime } = event;
+      console.log("before:", appointment_time);
+      const time = transformTimeFormat(appointment_time);
+      console.log("after:", time);
+      return {
+        ...eventWithoutTime,
+        "appointment_time": time
+      }
+    });
+    
     res.status(200).json({
       data: {
         events: events

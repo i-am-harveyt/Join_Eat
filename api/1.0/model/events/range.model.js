@@ -1,7 +1,7 @@
 import db from "../db.js";
 
 const rangeQuery = `
-SELECT id AS event_id, name, shop_name, latitude, longitude, people_limit, people_joined,
+SELECT id AS event_id, name, shop_name, latitude, longitude, people_limit, people_joined, appointment_time,
 Floor(ST_Distance_Sphere(POINT(?, ?), POINT(longitude, latitude))) AS distance
 FROM events
 WHERE status=FALSE

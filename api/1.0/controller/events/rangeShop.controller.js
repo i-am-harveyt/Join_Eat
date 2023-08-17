@@ -14,11 +14,19 @@ export default async function searchEventHandler(req, res, next) {
   }
 
   try {
-    const events = await getShopEvents(latitude, longitude, shop_latitude, shop_longitude);
+    const shopEvents = await getShopEvents(latitude, longitude, shop_latitude, shop_longitude);
 
+    const events = shopEvents.map(event => {
+      const { appointment_time, ...eventWithoutTime } = event;
+      const time = transformTimeFormat(appointment_time);
+      return {
+        ...eventWithoutTime,
+        "appointment_time": time
+      }
+    });
     res.status(200).json({
-      data: {
-        events: events
+      "data": {
+        "events": events
       }
     });
   } catch (err) {

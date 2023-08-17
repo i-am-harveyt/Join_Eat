@@ -1,5 +1,5 @@
 import getNearbyEvents from "../../model/events/range.model.js";
-
+import transformTimeFormat from "../../util/transfromTimeFormat.js";
 /**
  * @param {import('express').Request} req
  * @param {import('express').Response} res
@@ -15,9 +15,17 @@ export default async function rangeQueryHandler(req, res, next) {
   try {
     const nearbyEvents = await getNearbyEvents(latitude, longitude);
 
+    const events = nearbyEvents.map(event => {
+      const { appointment_time, ...eventWithoutTime } = event;
+      const time = transformTimeFormat(appointment_time);
+      return {
+        ...eventWithoutTime,
+        "appointment_time": time
+      }
+    });
     res.status(200).json({
       data: {
-        events: nearbyEvents
+        "events": events
       }
     });
   } catch (err) {
