@@ -1,4 +1,4 @@
-import crypto from "crypto"
+import crypto from "crypto";
 import eventCreate from "../../model/events/create.model.js";
 import verifyJWT from "../../util/jwt/verify.util.js";
 import { ECONNREFUSED } from "../../util/sqlErr.util.js";
