@@ -24,7 +24,7 @@
 {
   "name": "test-1",
   "email": "test-1@test.com",
-  "password": "test",
+  "password": "test"
 }
 ```
 
@@ -91,7 +91,7 @@
   "data": {
     "access_token": "some_token",
     "user": {
-      "user_id": 10,
+      "user_id": "101010101010101010",
       "name": "Test",
       "email": "test@test.com"
     }
@@ -164,7 +164,7 @@
 {
   "data": {
     "event": {
-      "event_id": 10
+      "event_id": "010101010101010"
     }
   }
 }
@@ -187,7 +187,7 @@
 
 ## Event Delete API
 
-- End Point: `/events/:events_id`
+- End Point: `/events/:event_id`
 - Method: `DELETE`
 - Request Headers:
 
@@ -197,9 +197,9 @@
 
 - Parameters
 
-| Field        | Type   | Description |
-| ------------ | ------ | ----------- |
-| event_id     | Number | Event's id  |
+| Field    | Type   | Description |
+| -------- | ------ | ----------- |
+| event_id | Number | Event's id  |
 
 - Request Body Example
 
@@ -271,7 +271,7 @@
   "data": {
     "events": [
       {
-        "event_id": 10,
+        "event_id": "121212121212212121212",
         "name": "來嘗試新出的牛肉麵吧！",
         "shop_name": "八方雲集新生仁愛店",
         "latitude": 25.0388368,
@@ -288,7 +288,7 @@
         }
       },
       {
-        "event_id": 12,
+        "event_id": "21212121212121",
         "name": "麥噹噹 YYDS",
         "shop_name": "麥當勞-台北濟南餐廳",
         "latitude": 25.0400737,
@@ -340,7 +340,7 @@
 {
   "data": {
     "event": {
-      "event_id": 10
+      "event_id": "1212121212121212"
     }
   }
 }
@@ -377,7 +377,7 @@
 {
   "data": {
     "event": {
-      "event_id": 10
+      "event_id": "111111111"
     }
   }
 }
@@ -407,9 +407,8 @@
 | Field     | Type   | Description                                                             |
 | --------- | ------ | ----------------------------------------------------------------------- |
 | keyword   | String | If the keyword had a `0E` then it is `event_id`, otherwise `event_name` |
-| latitude  | Number | required    |
-| longitude | Number | required    |
-
+| latitude  | Number | required                                                                |
+| longitude | Number | required                                                                |
 
 - Request Example: `https://[HOST_NAME]/api/[API_VERSION]/event/search?keyword=0E10&latitude=25.0388368&longitude=121.5325665`, `https://[HOST_NAME]/api/[API_VERSION]/event/search?keyword=麥噹噹&latitude=25.0388368&longitude=121.5325665`
 
@@ -426,7 +425,7 @@
   "data": {
     "events": [
       {
-        "event_id": 5,
+        "event_id": "111111111",
         "name": "沒人可以打敗麥噹噹",
         "shop_name": "某家麥當勞",
         "latitude": 25.0388368,
@@ -443,7 +442,7 @@
         }
       },
       {
-        "event_id": 12,
+        "event_id": "222222222",
         "name": "麥噹噹 YYDS",
         "shop_name": "麥當勞-台北濟南餐廳",
         "latitude": 25.0400737,
@@ -485,25 +484,31 @@
 
 - Request Parameters:
 
-| Field   | Type   | Description         |
-| ------- | ------ | ------------------- |
+| Field     | Type   | Description |
+| --------- | ------ | ----------- |
 | latitude  | Number | required    |
 | longitude | Number | required    |
 
-- Request Example: `https://[HOST_NAME]/api/[API_VERSION]/shop/search?&latitude=25.0388368&longitude=121.5325665`
+- Request Body:
 
+| Field     | Type  | Description |
+| --------- | ----- | ----------- |
+| latitude  | float | required    |
+| longitude | float | required    |
+
+- Request Example: `https://[HOST_NAME]/api/[API_VERSION]/shop/search?&latitude=25.0388368&longitude=121.5325665`
 
 - Request Body:
 
-| Field     | Type   | Description       |
-| --------- | ------ | ----------------- |
-| latitude  | Number | shop's latiude    |
-| longitude | Number | shop's longtiude  |
+| Field     | Type   | Description      |
+| --------- | ------ | ---------------- |
+| latitude  | Number | shop's latiude   |
+| longitude | Number | shop's longtiude |
 
 ```json
 {
-    "latitude":26.038846,
-    "longitude":121.532598
+  "latitude": 26.038846,
+  "longitude": 121.532598
 }
 ```
 
@@ -520,7 +525,7 @@
   "data": {
     "events": [
       {
-        "event_id": 1,
+        "event_id": "111111111",
         "name": "吃一波",
         "shop_name": "麥當勞-台北濟南餐廳",
         "latitude": 25.0388368,
@@ -537,11 +542,11 @@
         }
       },
       {
-        "event_id": 12,
+        "event_id": "222222222",
         "name": "麥噹噹 YYDS",
         "shop_name": "麥當勞-台北濟南餐廳",
-        "latitude": 25.0400737,
-        "longitude": 121.53261,
+        "latitude": 25.0388368,
+        "longitude": 121.5325665,
         "people_limit": 4,
         "people_num": 2,
         "distance": 502.3,
@@ -568,7 +573,8 @@
 | error | String | Error message |
 
 ## Event Detail API
-- End Point: `/events/events_id`
+
+- End Point: `/events/:event_id`
 - Method: `GET`
 
 - Request Header;
@@ -634,13 +640,19 @@ Request Example: `http://[HOST_NAME]/api/[API_VERSION]/events/1`
 | error | String | Error message |
 
 ## User Profile API
+
 ## User's Profile Update API
+
 ## User's Picture Update API
 
 ## Friends API
+
 ## Friends Pending API
+
 ## Friends Request API
+
 ## Friends Agree API
+
 ## Delete Friend API
- 
+
 ## Events Query Friendship

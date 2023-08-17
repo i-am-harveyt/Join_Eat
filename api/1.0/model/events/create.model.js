@@ -1,10 +1,28 @@
+import crypto from "crypto";
 import db from "../db.js";
-const query = `
-INSERT INTO events (host_id, name, shop_name, is_public, latitude, longitude, appointment_time, people_limit)
-VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+import getNow from "../../util/getNow.util.js";
+
+const eventsQuery = `
+INSERT INTO events(
+id,
+host_id,
+name,
+shop_name,
+is_public,
+latitude,
+longitude,
+appointment_time,
+people_limit,
+created_at)
+VALUES (UUID_TO_BIN(?), UUID_TO_BIN(?), ?, ?, ?, ?, ?, ?, ?, ?);
+`;
+const participantsQuery = `
+INSERT INTO participants(id, user_id, event_id, join_at)
+VALUES (UUID_TO_BIN(?), UUID_TO_BIN(?), UUID_TO_BIN(?), ?);
 `;
 
 /**
+ * @param {number} event_id: should be a uuid
  * @param {number} host_id
  * @param {string} event_name
  * @param {string} shop_name
@@ -15,30 +33,42 @@ VALUES (?, ?, ?, ?, ?, ?, ?, ?)
  * @param {String} appointment_time
  */
 export default async function eventCreate({
-  host_id,
-  event_name,
-  shop_name,
-  is_public,
-  latitude,
-  longitude,
-  appointment_time,
-  people_limit,
+	event_id,
+	host_id,
+	event_name,
+	shop_name,
+	is_public,
+	latitude,
+	longitude,
+	appointment_time,
+	people_limit,
 }) {
-  const params = [
-    host_id,
-    event_name,
-    shop_name,
+	const now = getNow();
+	const participantsId = crypto.randomUUID();
+	const eventsParams = [
+		event_id,
+		host_id,
+		event_name,
+		shop_name,
 		is_public,
-    latitude,
-    longitude,
-    appointment_time,
-    people_limit,
-  ];
-  console.log(params);
+		latitude,
+		longitude,
+		appointment_time,
+		people_limit,
+		now,
+	];
+	const participantsParams = [participantsId, host_id, event_id, now];
 
-  try {
-    return await db.execute(query, params);
-  } catch (err) {
-    throw err;
-  }
+	const con = await db.getConnection();
+	try {
+		await con.beginTransaction();
+		await con.execute(eventsQuery, eventsParams);
+		await con.execute(participantsQuery, participantsParams);
+		await con.commit();
+	} catch (err) {
+		await con.rollback();
+		db.releaseConnection();
+		throw err;
+	}
+	db.releaseConnection();
 }

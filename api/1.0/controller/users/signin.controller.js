@@ -25,6 +25,7 @@ export default async function signinHandler(req, res, next) {
         return res.status(400).json({ error: err });
     }
   }
+  if (!result) return res.status(400).json({ error: "User Not found!" });
 
   compareSync(password, result.password, (err, result) => {
     if (err) return res.status(403).json({ error: "Wrong Password" });

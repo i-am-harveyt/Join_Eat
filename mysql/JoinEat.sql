@@ -2,7 +2,7 @@ CREATE DATABASE IF NOT EXISTS JoinEat;
 USE JoinEat;
 
 CREATE TABLE IF NOT EXISTS `users`(
-  `id` int NOT NULL AUTO_INCREMENT,
+  `id` BINARY(16) NOT NULL PRIMARY KEY,
   `name` varchar(255) DEFAULT NULL,
   `email` varchar(255) DEFAULT NULL,
   `password` varchar(255) DEFAULT NULL,
@@ -10,13 +10,12 @@ CREATE TABLE IF NOT EXISTS `users`(
   `introduction` varchar(255) DEFAULT NULL,
   `tags` varchar(255) DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`),
   UNIQUE KEY `email` (`email`)
 );
 
 CREATE TABLE IF NOT EXISTS `events` (
-	`id` int NOT NULL AUTO_INCREMENT,
-	`host_id` int NOT NULL,
+	`id` BINARY(16) NOT NULL PRIMARY KEY,
+	`host_id` BINARY(16) NOT NULL,
 	`name` varchar(255) DEFAULT '',
 	`shop_name` varchar(255) DEFAULT '',
 	`is_public` boolean NOT NULL DEFAULT FALSE,
@@ -32,11 +31,23 @@ CREATE TABLE IF NOT EXISTS `events` (
 );
 
 CREATE TABLE IF NOT EXISTS `participants` (
-	`id` int NOT NULL AUTO_INCREMENT,
-	`user_id` int NOT NULL DEFAULT 0,
-	`event_id` int NOT NULL DEFAULT 0,
+	`id` BINARY(16) NOT NULL PRIMARY KEY, -- IN MOST CASES, IT DOES NOT MATTER
+	`user_id` BINARY(16) NOT NULL,
+	`event_id` BINARY(16) NOT NULL,
   `join_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-	PRIMARY KEY (`id`),
+	UNIQUE KEY user_event (`user_id`, `event_id`),
 	FOREIGN KEY(`user_id`) REFERENCES `users`(`id`) ON DELETE CASCADE,
 	FOREIGN KEY(`event_id`) REFERENCES `events`(`id`) ON DELETE CASCADE
 );
+
+DELIMITER //
+CREATE TRIGGER check_people_limit
+BEFORE UPDATE ON events
+FOR EACH ROW
+BEGIN
+    IF NEW.people_joined + 1 > NEW.people_limit THEN
+        SIGNAL SQLSTATE '45000'
+            SET MESSAGE_TEXT = 'People joined will exceed people limit';
+    END IF;
+END;
+//DELIMITER ;
