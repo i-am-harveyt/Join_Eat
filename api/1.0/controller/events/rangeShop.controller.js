@@ -1,12 +1,13 @@
 import getShopEvents from "../../model/events/rangeShop.model.js";
 import transformTimeFormat from "../../util/transfromTimeFormat.util.js";
-
+import { ECONNREFUSED } from "../../util/sqlErr.util.js";
 /**
  * @param {import('express').Request} req
  * @param {import('express').Response} res
  * @param {import('express').NextFunction} next
  */
 export default async function searchEventHandler(req, res, next) {
+  const user_id = req.user_id
   const shop_latitude = req.body.latitude
   const shop_longitude = req.body.longitude 
   const { latitude, longitude } = req.query; // self-position
@@ -15,7 +16,7 @@ export default async function searchEventHandler(req, res, next) {
   }
 
   try {
-    const shopEvents = await getShopEvents(latitude, longitude, shop_latitude, shop_longitude);
+    const shopEvents = await getShopEvents(user_id, latitude, longitude, shop_latitude, shop_longitude);
 
     const events = shopEvents.map(event => {
       const { appointment_time, ...eventWithoutTime } = event;

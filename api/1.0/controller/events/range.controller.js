@@ -1,11 +1,13 @@
 import getNearbyEvents from "../../model/events/range.model.js";
 import transformTimeFormat from "../../util/transfromTimeFormat.util.js";
+import { ECONNREFUSED } from "../../util/sqlErr.util.js";
 /**
  * @param {import('express').Request} req
  * @param {import('express').Response} res
  * @param {import('express').NextFunction} next
  */
 export default async function rangeQueryHandler(req, res, next) {
+  const user_id = req.user_id 
   const { latitude, longitude } = req.query;
 
   if (!(latitude && longitude)) {
@@ -13,7 +15,7 @@ export default async function rangeQueryHandler(req, res, next) {
   }
 
   try {
-    const nearbyEvents = await getNearbyEvents(latitude, longitude);
+    const nearbyEvents = await getNearbyEvents(user_id, latitude, longitude);
 
     const events = nearbyEvents.map(event => {
       const { appointment_time, ...eventWithoutTime } = event;
