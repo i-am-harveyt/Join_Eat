@@ -10,8 +10,8 @@ WHERE id=UUID_TO_BIN(?);
  * @param {number} userId
  * @param {number} targetId
  */
-export default async function fetchProfile(userId, _targetId) {
-  const param = [userId];
+export default async function fetchProfile(_userId, targetId) {
+  const param = [targetId];
   try {
     const [result] = await db.execute(query, param);
     return result;
