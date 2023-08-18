@@ -8,7 +8,6 @@ import { ECONNREFUSED } from "../../util/sqlErr.util.js";
  */
 export default async function rangeQueryHandler(req, res, next) {
   const user_id = req.user_id 
-  console.log(user_id)
   const { latitude, longitude } = req.query;
 
   if (!(latitude && longitude)) {
@@ -16,7 +15,6 @@ export default async function rangeQueryHandler(req, res, next) {
   }
 
   try {
-    console.log("hi, range.controller")
     const nearbyEvents = await getNearbyEvents(user_id, latitude, longitude);
 
     const events = nearbyEvents.map(event => {

@@ -3,6 +3,7 @@ import db from "../db.js";
 const searchQuery = `
 SELECT BIN_TO_UUID(id) AS event_id, name, shop_name, latitude, longitude, people_limit, people_joined, appointment_time,
 Floor(ST_Distance_Sphere(POINT(?, ?), POINT(longitude, latitude))) AS distance,
+( SELECT picture FROM users WHERE users.id = events.id ) AS picture,
 ( SELECT COUNT(*) FROM participants WHERE participants.user_id = UUID_TO_BIN(?) AND participants.event_id = events.id ) AS is_joined
 FROM events
 WHERE status=FALSE AND (name LIKE ? OR id=?) 
