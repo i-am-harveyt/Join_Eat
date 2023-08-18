@@ -1,7 +1,6 @@
 /**
  * @param {string} stirngTime
  */
-
 export default function transformTimeFormat(stringTime) {
   const time = new Date(stringTime);
   return {
