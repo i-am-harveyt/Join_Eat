@@ -7,6 +7,7 @@ import { ECONNREFUSED } from "../../util/sqlErr.util.js";
  * @param {import('express').NextFunction} next
  */
 export default async function searchEventHandler(req, res, next) {
+  const user_id = req.user_id
   const { keyword, latitude, longitude } = req.query;
 
   if (!(keyword && latitude && longitude)) {
@@ -14,7 +15,7 @@ export default async function searchEventHandler(req, res, next) {
   }
 
   try {
-    const searchEvents = await getSearchEvents(keyword, latitude, longitude);
+    const searchEvents = await getSearchEvents(user_id, keyword, latitude, longitude);
     const events = searchEvents.map(event => {
       const { appointment_time, ...eventWithoutTime } = event;
       const time = transformTimeFormat(appointment_time);

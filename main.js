@@ -1,10 +1,11 @@
 import express from "express";
+import cors from "cors";
 import { config } from "dotenv";
 config();
 import api from "./api/1.0/api.js";
-import db from "./api/1.0/model/db.js";
 
 const app = express();
+app.use(cors());
 app.use(express.json());
 const port = process.env.JOIN_EAT_PORT;
 
