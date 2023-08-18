@@ -14,13 +14,8 @@ import verifyJWT from "../../util/jwt/verify.util.js";
  * @param {import('express').NextFunction} next
  */
 export default async function eventJoinHandler(req, res, next) {
-  let userId = 0;
-  try {
-    const result = verifyJWT(req.headers.authorization);
-    userId = result.user_id;
-  } catch (err) {
-    return res.status(403).json({ error: "Wrong Token" });
-  }
+  const result = verifyJWT(req.headers.authorization);
+  const userId = result.user_id;
 
   const eventId = req.params.event_id;
   if (!eventId)

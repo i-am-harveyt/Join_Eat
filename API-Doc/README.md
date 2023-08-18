@@ -116,9 +116,10 @@
 - Method: `POST`
 - Request Headers:
 
-| Field        | Type   | Description                     |
-| ------------ | ------ | ------------------------------- |
-| Content-Type | String | Only accept `application/json`. |
+| Field         | Type   | Description                                                   |
+| ------------- | ------ | ------------------------------------------------------------- |
+| Content-Type  | String | Only accept `application/json`.                               |
+| Authorization | String | Access token preceding `Bearer` . For example: `Bearer token` |
 
 - Request Body:
 
@@ -272,6 +273,7 @@
     "events": [
       {
         "event_id": "121212121212212121212",
+        "host_id": "something",
         "name": "來嘗試新出的牛肉麵吧！",
         "shop_name": "八方雲集新生仁愛店",
         "latitude": 25.0388368,
@@ -289,6 +291,7 @@
       },
       {
         "event_id": "21212121212121",
+        "host_id": "something",
         "name": "麥噹噹 YYDS",
         "shop_name": "麥當勞-台北濟南餐廳",
         "latitude": 25.0400737,
@@ -426,6 +429,7 @@
     "events": [
       {
         "event_id": "111111111",
+        "host_id": "something",
         "name": "沒人可以打敗麥噹噹",
         "shop_name": "某家麥當勞",
         "latitude": 25.0388368,
@@ -443,6 +447,7 @@
       },
       {
         "event_id": "222222222",
+        "host_id": "something",
         "name": "麥噹噹 YYDS",
         "shop_name": "麥當勞-台北濟南餐廳",
         "latitude": 25.0400737,
@@ -526,6 +531,7 @@
     "events": [
       {
         "event_id": "111111111",
+        "host_id": "111111111",
         "name": "吃一波",
         "shop_name": "麥當勞-台北濟南餐廳",
         "latitude": 25.0388368,
@@ -543,6 +549,7 @@
       },
       {
         "event_id": "222222222",
+        "host_id": "111111111",
         "name": "麥噹噹 YYDS",
         "shop_name": "麥當勞-台北濟南餐廳",
         "latitude": 25.0388368,
@@ -596,7 +603,7 @@ Request Example: `http://[HOST_NAME]/api/[API_VERSION]/events/1`
 ```json
 {
   "data": {
-    "event":{
+    "event": {
       "host_id": 1,
       "event_id": 1,
       "name": "吃一波",
@@ -613,6 +620,7 @@ Request Example: `http://[HOST_NAME]/api/[API_VERSION]/events/1`
         "hour": 18,
         "minute": 30
       },
+      "is_joined": true,
       "participants": [
         {
           "id": "1",
@@ -641,7 +649,172 @@ Request Example: `http://[HOST_NAME]/api/[API_VERSION]/events/1`
 
 ## User Profile API
 
+- Endpoint: `/users/:user_id`
+- Method: `GET`
+- Request Headers:
+
+| Field         | Type   | Description                                                   |
+| ------------- | ------ | ------------------------------------------------------------- |
+| Authorization | String | Access token preceding `Bearer` . For example: `Bearer token` |
+
+- Parameters
+
+| Field    | Type   | Description |
+| -------- | ------ | ----------- |
+| event_id | Number | event's id  |
+
+- Success Response Example
+
+```json
+{
+  "data": {
+    "user": {
+      "user_id": "8ceb3d97-50e8-4a5c-8919-2b61bac02cb9",
+      "name": "Test",
+      "email": "test@test.com",
+      "picture": "some_url",
+      "introduction": "hello",
+      "tags": "tags"
+    }
+  }
+}
+```
+
+- Client Error Response(no token): 401
+- Client Error Response(wrong token): 403
+- Client Error Response: 400
+- Server Error Response: 500
+
+| Field | Type   | Description   |
+| ----- | ------ | ------------- |
+| error | String | Error message |
+
+## Event History
+
+- Endpoint: `/users/:user_id/events`
+- Method: `GET`
+- Request Headers:
+
+| Field         | Type   | Description                                                   |
+| ------------- | ------ | ------------------------------------------------------------- |
+| Authorization | String | Access token preceding `Bearer` . For example: `Bearer token` |
+
+- Parameters
+
+| Field   | Type   | Description |
+| ------- | ------ | ----------- |
+| user_id | Number | user's id   |
+
+- Success Response Example
+
+```json
+{
+  "data": {
+    "events": [
+      {
+        "event_id": "111111111",
+        "host_id": "something",
+        "name": "沒人可以打敗麥噹噹",
+        "shop_name": "某家麥當勞",
+        "latitude": 25.0388368,
+        "longitude": 121.5325665,
+        "people_limit": 6,
+        "people_num": 6,
+        "distance": 0.0,
+        "appointment_time": {
+          "year": 2023,
+          "month": 8,
+          "date": 15,
+          "hour": 18,
+          "minute": 30
+        }
+      },
+      {
+        "event_id": "222222222",
+        "host_id": "something",
+        "name": "麥噹噹 YYDS",
+        "shop_name": "麥當勞-台北濟南餐廳",
+        "latitude": 25.0400737,
+        "longitude": 121.53261,
+        "people_limit": 4,
+        "people_num": 2,
+        "distance": 502.3,
+        "appointment_time": {
+          "year": 2023,
+          "month": 8,
+          "date": 15,
+          "hour": 18,
+          "minute": 30
+        }
+      }
+    ]
+  }
+}
+```
+
+- Client Error Response(no token): 401
+- Client Error Response(wrong token): 403
+- Client Error Response: 400
+- Server Error Response: 500
+
+| Field | Type   | Description   |
+| ----- | ------ | ------------- |
+| error | String | Error message |
+
 ## User's Profile Update API
+
+- Endpoint: `/users/:user_id`
+- Method: `POST`
+- Request Headers:
+
+| Field         | Type   | Description                                                   |
+| ------------- | ------ | ------------------------------------------------------------- |
+| Authorization | String | Access token preceding `Bearer` . For example: `Bearer token` |
+
+- Parameters
+
+| Field   | Type   | Description |
+| ------- | ------ | ----------- |
+| user_id | Number | user's id   |
+
+- Request Body:
+
+| Field        | Type   | Description |
+| ------------ | ------ | ----------- |
+| name         | String | Optional    |
+| introduction | String | Optional    |
+| tags         | String | Optional    |
+
+- Request Body Example:
+
+```json
+{
+  "name": "Test1",
+  "introduction": "Hello, my name is Test1",
+  "tags": "surfing"
+}
+```
+
+- Success Response Example
+
+```json
+{
+  "data": {
+    "user": {
+      "user_id": "8ceb3d97-50e8-4a5c-8919-2b61bac02cb9"
+    }
+  }
+}
+```
+
+- Client Error Response(no token): 401
+- Client Error Response(wrong token): 403
+- Client Error Response: 400
+- Server Error Response: 500
+
+| Field | Type   | Description   |
+| ----- | ------ | ------------- |
+| error | String | Error message |
 
 ## User's Picture Update API
 
