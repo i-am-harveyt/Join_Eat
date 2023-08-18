@@ -12,6 +12,8 @@ import {
  */
 export default async function fetchHistoryHandler(req, res, next) {
 	const userId = req.user_id;
+	const targetId = req.params.user_id;
+	if (userId !== targetId) return res.status(200).json({data: { events: []}})
 
 	let result = null;
 	try {

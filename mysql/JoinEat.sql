@@ -39,14 +39,48 @@ FOREIGN KEY(`user_id`) REFERENCES `users`(`id`) ON DELETE CASCADE,
 FOREIGN KEY(`event_id`) REFERENCES `events`(`id`) ON DELETE CASCADE
 );
 
+-- checking people limit may be exceed or not
 DELIMITER //
 CREATE TRIGGER check_people_limit
-BEFORE UPDATE ON events
-FOR EACH ROW
+BEFORE UPDATE ON events FOR EACH ROW
 BEGIN
-IF NEW.people_joined > NEW.people_limit THEN
-SIGNAL SQLSTATE '45000'
-SET MESSAGE_TEXT = 'People joined will exceed people limit';
-END IF;
+	IF NEW.people_joined > NEW.people_limit THEN
+		SIGNAL SQLSTATE '45000'
+		SET MESSAGE_TEXT = 'People joined will exceed people limit';
+	END IF;
 END;
-//DELIMITER;
+//
+
+CREATE TRIGGER check_host_quit
+BEFORE DELETE ON participants FOR EACH ROW
+BEGIN
+	DECLARE event_host_id BINARY(16);
+	SELECT host_id INTO event_host_id
+	FROM events WHERE id=OLD.event_id;
+	IF OLD.user_id = event_host_id THEN
+		SIGNAL SQLSTATE '45000'
+		SET MESSAGE_TEXT = 'Host cannot quite the event';
+	END IF;
+END
+//
+
+-- update people joined
+CREATE PROCEDURE UpdatePeopleJoined(event_id BINARY(16), increment INT)
+BEGIN
+	UPDATE events SET people_joined = people_joined + increment
+	WHERE id = event_id;
+END;
+//
+CREATE TRIGGER add_people_joined
+AFTER INSERT ON participants FOR EACH ROW
+BEGIN
+	CALL UpdatePeopleJoined(NEW.event_id, 1);
+END;
+//
+CREATE TRIGGER dec_people_joined
+AFTER DELETE ON participants FOR EACH ROW
+BEGIN
+	CALL UpdatePeopleJoined(OLD.event_id, -1);
+END;
+//
+DELIMITER ;
