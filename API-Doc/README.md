@@ -479,7 +479,7 @@
 
 ## Query Shop API
 
-- End Point: `/shop/search`
+- End Point: `/events/shop`
 - Method: `GET`
 - Request Header;
 
@@ -494,14 +494,7 @@
 | latitude  | Number | required    |
 | longitude | Number | required    |
 
-- Request Body:
-
-| Field     | Type  | Description |
-| --------- | ----- | ----------- |
-| latitude  | float | required    |
-| longitude | float | required    |
-
-- Request Example: `https://[HOST_NAME]/api/[API_VERSION]/shop/search?&latitude=25.0388368&longitude=121.5325665`
+- Request Example: `https://[HOST_NAME]/api/[API_VERSION]/events/shop?latitude=25.0388368&longitude=121.5325665`
 
 - Request Body:
 
