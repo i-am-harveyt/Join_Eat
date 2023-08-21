@@ -13,12 +13,14 @@ import transformTimeFormat from "../../util/transfromTimeFormat.util.js";
 export default async function eventDetailHandler(req, res, next) {
 	const userId = req.user_id;
 	const eventId = req.params.event_id;
+	const { latitude, longitude } = req.query;
+	console.log(userId, eventId, latitude, longitude)
 	if (!(userId && eventId))
 		return res.status(400).json({ error: "Missing Required Data" });
 
 	let data = null;
 	try {
-		const [row] = await eventDetail(eventId, userId);
+		const [row] = await eventDetail(eventId, userId, longitude, latitude);
 		data = row;
 	} catch (err) {
 		switch (err.errno) {

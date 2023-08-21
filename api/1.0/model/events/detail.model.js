@@ -20,6 +20,7 @@ BIN_TO_UUID(E.id) AS event_id,
 BIN_TO_UUID(E.host_id) AS host_id,
 E.name, E.shop_name, E.latitude, E.longitude,
 E.people_limit, E.people_joined, E.appointment_time,
+Floor(ST_Distance_Sphere(POINT(?, ?), POINT(E.longitude, E.latitude))) AS distance,
 CASE WHEN J.participant_id IS NOT NULL THEN 1 ELSE 0 END AS is_joined
 FROM events E
 LEFT JOIN event_participants_id J ON J.participant_id=UUID_TO_BIN(?)
@@ -30,8 +31,8 @@ WHERE E.id=UUID_TO_BIN(?);
  * @param {number} eventId
  * @param {number} userId
  */
-export default async function eventDetail(eventId, userId) {
-  const eventParams = [eventId, userId, eventId];
+export default async function eventDetail(eventId, userId, longitude, latitude) {
+  const eventParams = [eventId, longitude, latitude, userId, eventId];
   const participantsParams = [eventId];
 
   const conn = await db.getConnection();

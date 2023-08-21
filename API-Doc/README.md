@@ -590,7 +590,14 @@
 | ------------- | ------ | ------------------------------------------------------------- |
 | Authorization | String | Access token preceding `Bearer` . For example: `Bearer token` |
 
-Request Example: `http://[HOST_NAME]/api/[API_VERSION]/events/1`
+- Request Parameters:
+
+| Field     | Type   | Description |
+| --------- | ------ | ----------- |
+| latitude  | Number | required    |
+| longitude | Number | required    |
+
+Request Example: `http://[HOST_NAME]/api/[API_VERSION]/events/1?latitude=26.0288368&longitude=121.5325665`
 
 - Success Response: 200
 
