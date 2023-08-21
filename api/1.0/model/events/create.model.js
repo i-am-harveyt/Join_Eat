@@ -12,9 +12,10 @@ is_public,
 latitude,
 longitude,
 appointment_time,
+people_joined,
 people_limit,
 created_at)
-VALUES (UUID_TO_BIN(?), UUID_TO_BIN(?), ?, ?, ?, ?, ?, ?, ?, ?);
+VALUES (UUID_TO_BIN(?), UUID_TO_BIN(?), ?, ?, ?, ?, ?, ?, 0, ?, ?);
 `;
 const participantsQuery = `
 INSERT INTO participants(id, user_id, event_id, join_at)
