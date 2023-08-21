@@ -7,4 +7,8 @@ export const ER_WRONG_VALUE_FOR_TYPE = {
 export const EXCEED_PEOPLE_LIMIT = {
 	errno: 1644,
 	message: "This request will exceed people limit!",
-}
+};
+export const HOST_CANNOT_QUIT = {
+	errno: 1644,
+	message: "Host cannot quit the event, please delete this event.",
+};
