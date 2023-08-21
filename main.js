@@ -7,6 +7,7 @@ import api from "./api/1.0/api.js";
 const app = express();
 app.use(cors());
 app.use(express.json());
+app.use("/static", express.static("./static"))
 const port = process.env.JOIN_EAT_PORT;
 
 app.get("/", (req, res) => {
