@@ -19,7 +19,7 @@ SELECT
 BIN_TO_UUID(E.id) AS event_id,
 BIN_TO_UUID(E.host_id) AS host_id,
 E.name, E.shop_name, E.latitude, E.longitude,
-E.people_limit, E.people_joined, E.appointment_time,
+E.people_limit, E.people_joined, E.appointment_time, E.is_public,
 Floor(ST_Distance_Sphere(POINT(?, ?), POINT(E.longitude, E.latitude))) AS distance,
 CASE WHEN J.participant_id IS NOT NULL THEN 1 ELSE 0 END AS is_joined
 FROM events E
