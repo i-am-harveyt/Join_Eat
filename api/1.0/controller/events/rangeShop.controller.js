@@ -11,6 +11,8 @@ export default async function searchEventHandler(req, res, next) {
   const shop_latitude = req.body.latitude
   const shop_longitude = req.body.longitude 
   const { latitude, longitude } = req.query; // self-position
+  console.log("self", latitude, longitude)
+  console.log("shop", shop_latitude, shop_longitude)
   if (!(latitude && longitude && shop_latitude && shop_longitude)) {
     return res.status(400).json({ error: "Missing Required Input" });
   }
