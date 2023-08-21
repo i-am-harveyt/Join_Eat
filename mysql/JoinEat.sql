@@ -83,4 +83,15 @@ BEGIN
 	CALL UpdatePeopleJoined(OLD.event_id, -1);
 END;
 //
+
+-- check_expired_events
+CREATE EVENT check_expired_events
+ON SCHEDULE EVERY 1 MINUTE
+DO
+  BEGIN
+    UPDATE events
+    SET status = TRUE
+    WHERE appointment_time < DATE_ADD(NOW(), INTERVAL 8 HOUR);
+  END;
+//
 DELIMITER ;
