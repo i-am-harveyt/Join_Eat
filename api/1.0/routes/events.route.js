@@ -1,4 +1,5 @@
 import { Router } from "express";
+import { isForm, isJSON } from "../middleware/requestType.mid.js";
 import asyncWrapper from "../util/asyncWrapper.util.js";
 import verifyTokenMiddleware from "../middleware/verifyToken.mid.js";
 import eventCreateHandler from "../controller/events/create.controller.js";
@@ -14,12 +15,12 @@ const events = Router();
 
 events.use(verifyTokenMiddleware);
 
-events.post("/", asyncWrapper(eventCreateHandler));
+events.post("/", isJSON, asyncWrapper(eventCreateHandler));
 events.get("/", asyncWrapper(rangeQueryHandler));
 events.get("/search", asyncWrapper(searchEventHandler));
-events.post("/shop", asyncWrapper(rangeShopHandler));
-events.post("/:event_id/join", asyncWrapper(eventJoinHandler));
-events.post("/:event_id/quit", asyncWrapper(eventQuitHandler));
+events.post("/shop", isJSON, asyncWrapper(rangeShopHandler));
+events.post("/:event_id/join", isJSON, asyncWrapper(eventJoinHandler));
+events.post("/:event_id/quit", isJSON, asyncWrapper(eventQuitHandler));
 events.delete("/:event_id", asyncWrapper(eventDeleteHandler));
 events.get("/:event_id", asyncWrapper(eventDetailHandler));
 
