@@ -13,10 +13,14 @@ import {
 export default async function fetchHistoryHandler(req, res, next) {
 	const userId = req.user_id;
 	const targetId = req.params.user_id;
+	const { longitude, latitude } = req.query;
+
+	if (!(targetId && longitude && latitude))
+		return res.status(400).json({ error: "Missing required data!" });
 
 	let result = null;
 	try {
-		[result] = await fetchHistory(userId, targetId);
+		[result] = await fetchHistory(userId, targetId, longitude, latitude);
 	} catch (err) {
 		switch (err.errno) {
 			case ECONNREFUSED.errno:
@@ -42,13 +46,11 @@ export default async function fetchHistoryHandler(req, res, next) {
 		};
 	});
 
-	return res
-		.status(200)
-		.json({
-			data: {
-				host_count: hostCnt,
-				participant_count: participantCnt,
-				events: ret,
-			},
-		});
+	return res.status(200).json({
+		data: {
+			host_count: hostCnt,
+			participant_count: participantCnt,
+			events: ret,
+		},
+	});
 }
