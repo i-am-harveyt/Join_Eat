@@ -8,7 +8,7 @@ name, shop_name, latitude, longitude, people_limit, people_joined, appointment_t
 Floor(ST_Distance_Sphere(POINT(?, ?), POINT(?, ?))) AS distance,
 ( SELECT COUNT(*) FROM participants WHERE participants.user_id = UUID_TO_BIN(?) AND participants.event_id = events.id ) AS is_joined
 FROM events
-WHERE longitude=? AND latitude=?;
+WHERE longitude=? AND latitude=? AND is_public=TRUE;
 `;
 
 /**

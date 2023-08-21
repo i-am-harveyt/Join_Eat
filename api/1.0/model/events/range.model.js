@@ -7,7 +7,7 @@ name, shop_name, latitude, longitude, people_limit, people_joined, appointment_t
 Floor(ST_Distance_Sphere(POINT(?, ?), POINT(longitude, latitude))) AS distance,
 ( SELECT COUNT(*) FROM participants WHERE participants.user_id = UUID_TO_BIN(?) AND participants.event_id = events.id ) AS is_joined
 FROM events
-WHERE status=FALSE
+WHERE status=FALSE AND is_public=TRUE
 HAVING distance <= 2000
 ORDER BY distance
 `;
