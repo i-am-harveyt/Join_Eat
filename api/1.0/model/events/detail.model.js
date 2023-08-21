@@ -30,6 +30,8 @@ WHERE E.id=UUID_TO_BIN(?);
 /**
  * @param {number} eventId
  * @param {number} userId
+ * @param {number} longitude
+ * @param {number} latitude
  */
 export default async function eventDetail(eventId, userId, longitude, latitude) {
   const eventParams = [eventId, longitude, latitude, userId, eventId];
