@@ -28,14 +28,27 @@ export default async function fetchHistoryHandler(req, res, next) {
 				return res.status(400).json({ error: err });
 		}
 	}
-	const ret = result.map(
-		row => {
-			return {
-				...row,
-				appointment_time: transformTimeFormat(row.appointment_time),
-			}
-		},
-	);
 
-	return res.status(200).json({ data: { events: ret } });
+	let hostCnt = 0,
+		participantCnt = 0;
+
+	const ret = result.map((row) => {
+		if (row.host_id === targetId) hostCnt++;
+		else participantCnt++;
+
+		return {
+			...row,
+			appointment_time: transformTimeFormat(row.appointment_time),
+		};
+	});
+
+	return res
+		.status(200)
+		.json({
+			data: {
+				host_count: hostCnt,
+				participant_count: participantCnt,
+				events: ret,
+			},
+		});
 }
