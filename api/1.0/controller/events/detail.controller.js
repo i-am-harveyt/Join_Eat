@@ -14,7 +14,7 @@ export default async function eventDetailHandler(req, res, next) {
 	const userId = req.user_id;
 	const eventId = req.params.event_id;
 	const { latitude, longitude } = req.query;
-	console.log(userId, eventId, latitude, longitude)
+
 	if (!(userId && eventId))
 		return res.status(400).json({ error: "Missing Required Data" });
 
