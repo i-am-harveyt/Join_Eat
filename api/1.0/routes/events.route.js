@@ -17,7 +17,6 @@ events.use(verifyTokenMiddleware);
 events.post("/", asyncWrapper(eventCreateHandler));
 events.get("/", asyncWrapper(rangeQueryHandler));
 events.get("/search", asyncWrapper(searchEventHandler));
-events.get("/shop", asyncWrapper(rangeShopHandler));
 events.post("/shop", asyncWrapper(rangeShopHandler));
 events.post("/:event_id/join", asyncWrapper(eventJoinHandler));
 events.post("/:event_id/quit", asyncWrapper(eventQuitHandler));
