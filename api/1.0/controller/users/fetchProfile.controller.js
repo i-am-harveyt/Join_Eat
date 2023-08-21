@@ -25,5 +25,6 @@ export default async function fetchProfileHandler(req, res, next) {
         return res.status(400).json({ error: err });
     }
   }
+	result.picture = `http://${process.env.JOINEAT_HOST}${result.picture}`;
   return res.status(200).json({ data: { user: result } });
 }

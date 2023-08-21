@@ -763,25 +763,18 @@ Request Example: `http://[HOST_NAME]/api/[API_VERSION]/events/1?latitude=26.0288
 
 ## User's Profile Update API
 
-- Endpoint: `/users/:user_id`
-- Method: `POST`
+- Endpoint: `/users/profile/`
+- Method: `PUT`
 - Request Headers:
 
 | Field         | Type   | Description                                                   |
 | ------------- | ------ | ------------------------------------------------------------- |
 | Authorization | String | Access token preceding `Bearer` . For example: `Bearer token` |
 
-- Parameters
-
-| Field   | Type   | Description |
-| ------- | ------ | ----------- |
-| user_id | Number | user's id   |
-
 - Request Body:
 
 | Field        | Type   | Description |
 | ------------ | ------ | ----------- |
-| name         | String | Optional    |
 | introduction | String | Optional    |
 | tags         | String | Optional    |
 
@@ -789,7 +782,6 @@ Request Example: `http://[HOST_NAME]/api/[API_VERSION]/events/1?latitude=26.0288
 
 ```json
 {
-  "name": "Test1",
   "introduction": "Hello, my name is Test1",
   "tags": "surfing"
 }
@@ -817,6 +809,46 @@ Request Example: `http://[HOST_NAME]/api/[API_VERSION]/events/1?latitude=26.0288
 | error | String | Error message |
 
 ## User's Picture Update API
+
+- End Point: `/users/picture`
+- Method: `PUT`
+- Request Headers:
+
+| Field         | Type   | Description                        |
+| ------------- | ------ | ---------------------------------- |
+| Authorization | String | Access token preceding `Bearer `.  |
+| Content-Type  | String | Only accept `multipart/form-data`. |
+
+- Request Body
+
+| Field   | Type | Description |
+| ------- | ---- | ----------- |
+| picture | File | Image File. |
+
+- Success Response: 200
+
+| Field   | Type   | Description |
+| ------- | ------ | ----------- |
+| picture | String | Image Link  |
+
+- Success Response Example:
+
+```json
+{
+  "data": {
+    "picture": "http://joineat.com/static/user_id.png"
+  }
+}
+```
+
+- Client Error Response(no token): 401
+- Client Error Response(wrong token): 403
+- Client Error Response: 400
+- Server Error Response: 500
+
+| Field | Type   | Description   |
+| ----- | ------ | ------------- |
+| error | String | Error message |
 
 ## Friends API
 

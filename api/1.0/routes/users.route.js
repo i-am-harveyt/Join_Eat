@@ -6,6 +6,7 @@ import fetchProfileHandler from "../controller/users/fetchProfile.controller.js"
 import verifyTokenMiddleware from "../middleware/verifyToken.mid.js";
 import fetchHistoryHandler from "../controller/users/fetchHistory.controller.js";
 import updateProfileHandler from "../controller/users/updateProfile.controller.js";
+import { picUploader, uploadPictureHandler } from "../controller/users/uploadPicture.controller.js";
 
 const users = Router();
 
@@ -32,5 +33,11 @@ users.put(
 	verifyTokenMiddleware,
 	asyncWrapper(updateProfileHandler),
 );
+users.put(
+	"/picture",
+	verifyTokenMiddleware,
+	picUploader.single("picture"),
+	asyncWrapper(uploadPictureHandler),
+)
 
 export default users;

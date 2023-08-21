@@ -13,10 +13,11 @@ import {
 export default async function fetchHistoryHandler(req, res, next) {
 	const userId = req.user_id;
 	const targetId = req.params.user_id;
+	const {longitude, latitude} = req.query;
 
 	let result = null;
 	try {
-		[result] = await fetchHistory(userId, targetId);
+		[result] = await fetchHistory(userId, targetId, longitude, latitude);
 	} catch (err) {
 		switch (err.errno) {
 			case ECONNREFUSED.errno:
