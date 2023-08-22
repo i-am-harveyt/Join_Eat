@@ -68,8 +68,8 @@ export default async function eventCreate({
 		await con.commit();
 	} catch (err) {
 		await con.rollback();
-		db.releaseConnection();
+		con.release();
 		throw err;
 	}
-	db.releaseConnection();
+	con.release();
 }
