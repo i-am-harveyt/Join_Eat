@@ -70,7 +70,7 @@
 
 - Request Body Example:
 
-```
+```json
 {
   "email":"test@test.com",
   "password":"test"
@@ -274,13 +274,16 @@
       {
         "event_id": "121212121212212121212",
         "host_id": "something",
+        "picture": "http://13.54.3.89/static/fb29e9a0-f4e6-4097-8234-027da08f63f1.jpeg",
         "name": "來嘗試新出的牛肉麵吧！",
         "shop_name": "八方雲集新生仁愛店",
         "latitude": 25.0388368,
         "longitude": 121.5325665,
         "people_limit": 6,
-        "people_num": 6,
+        "people_joined": 6,
+        "is_public": 1,
         "distance": 0.0,
+        "is_joined": 1,
         "appointment_time": {
           "year": 2023,
           "month": 8,
@@ -292,13 +295,16 @@
       {
         "event_id": "21212121212121",
         "host_id": "something",
+        "picture": "http://13.54.3.89/static/fb29e9a0-f4e6-4097-8234-027da08f63f1.jpeg",
         "name": "麥噹噹 YYDS",
         "shop_name": "麥當勞-台北濟南餐廳",
         "latitude": 25.0400737,
         "longitude": 121.53261,
-        "people_limit": 4,
-        "people_num": 2,
-        "distance": 502.3,
+        "people_limit": 6,
+        "people_joined": 6,
+        "is_public": 1,
+        "distance": 200.0,
+        "is_joined": 1,
         "appointment_time": {
           "year": 2023,
           "month": 8,
@@ -407,13 +413,13 @@
 
 - Request Parameters:
 
-| Field     | Type   | Description                                                             |
-| --------- | ------ | ----------------------------------------------------------------------- |
-| keyword   | String | If the keyword had a `0E` then it is `event_id`, otherwise `event_name` |
-| latitude  | Number | required                                                                |
-| longitude | Number | required                                                                |
+| Field     | Type   | Description                               |
+| --------- | ------ | ------------------------------------------|
+| keyword   | String | keyword can be `event_id` or `event_name` |
+| latitude  | Number | required                                  |
+| longitude | Number | required                                  |
 
-- Request Example: `https://[HOST_NAME]/api/[API_VERSION]/event/search?keyword=0E10&latitude=25.0388368&longitude=121.5325665`, `https://[HOST_NAME]/api/[API_VERSION]/event/search?keyword=麥噹噹&latitude=25.0388368&longitude=121.5325665`
+- Request Example: `https://[HOST_NAME]/api/[API_VERSION]/event/search?keyword=fb550c3b-aced-4757-90b6-07ce3a57480e&latitude=25.0388368&longitude=121.5325665`, `https://[HOST_NAME]/api/[API_VERSION]/event/search?keyword=木&latitude=25.0388368&longitude=121.5325665`
 
 - Success Response: 200
 
@@ -428,39 +434,24 @@
   "data": {
     "events": [
       {
-        "event_id": "111111111",
-        "host_id": "something",
-        "name": "沒人可以打敗麥噹噹",
-        "shop_name": "某家麥當勞",
-        "latitude": 25.0388368,
-        "longitude": 121.5325665,
-        "people_limit": 6,
-        "people_num": 6,
-        "distance": 0.0,
+        "event_id": "fb550c3b-aced-4757-90b6-07ce3a57480e",
+        "host_id": "c82cb849-b3a5-4b61-88d6-8a13ca38865c",
+        "picture": null,
+        "name": "木",
+        "shop_name": "木木木",
+        "latitude": "26.028460",
+        "longitude": "121.532550",
+        "people_limit": 2,
+        "people_joined": 1,
+        "is_public": 0,
+        "distance": 110040,
+        "is_joined": 1,
         "appointment_time": {
-          "year": 2023,
-          "month": 8,
-          "date": 15,
-          "hour": 18,
-          "minute": 30
-        }
-      },
-      {
-        "event_id": "222222222",
-        "host_id": "something",
-        "name": "麥噹噹 YYDS",
-        "shop_name": "麥當勞-台北濟南餐廳",
-        "latitude": 25.0400737,
-        "longitude": 121.53261,
-        "people_limit": 4,
-        "people_num": 2,
-        "distance": 502.3,
-        "appointment_time": {
-          "year": 2023,
-          "month": 8,
-          "date": 15,
-          "hour": 18,
-          "minute": 30
+            "year": "2023",
+            "month": "9",
+            "date": "17",
+            "hour": "10",
+            "minute": "30"
         }
       }
     ]
@@ -525,39 +516,45 @@
   "data": {
     "events": [
       {
-        "event_id": "111111111",
-        "host_id": "111111111",
-        "name": "吃一波",
-        "shop_name": "麥當勞-台北濟南餐廳",
-        "latitude": 25.0388368,
-        "longitude": 121.5325665,
-        "people_limit": 6,
-        "people_num": 6,
-        "distance": 0.0,
+        "event_id": "0136c91d-fc35-4de9-8e0f-18230d45ce41",
+        "host_id": "c82cb849-b3a5-4b61-88d6-8a13ca38865c",
+        "picture": null,
+        "name": "6666",
+        "shop_name": "6666666",
+        "latitude": "26.038846",
+        "longitude": "121.532550",
+        "people_limit": 5,
+        "people_joined": 1,
+        "is_public": 1,
+        "distance": 4448,
+        "is_joined": 1,
         "appointment_time": {
-          "year": 2023,
-          "month": 8,
-          "date": 15,
-          "hour": 18,
-          "minute": 30
+            "year": "2023",
+            "month": "8",
+            "date": "15",
+            "hour": "18",
+            "minute": "30"
         }
-      },
-      {
-        "event_id": "222222222",
-        "host_id": "111111111",
-        "name": "麥噹噹 YYDS",
-        "shop_name": "麥當勞-台北濟南餐廳",
-        "latitude": 25.0388368,
-        "longitude": 121.5325665,
-        "people_limit": 4,
-        "people_num": 2,
-        "distance": 502.3,
+    },
+    {
+        "event_id": "5020952e-0e1f-4b2f-8022-6a508ba4e907",
+        "host_id": "c82cb849-b3a5-4b61-88d6-8a13ca38865c",
+        "picture": null,
+        "name": "6666",
+        "shop_name": "6666666",
+        "latitude": "26.038846",
+        "longitude": "121.532550",
+        "people_limit": 5,
+        "people_joined": 1,
+        "is_public": 1,
+        "distance": 4448,
+        "is_joined": 1,
         "appointment_time": {
-          "year": 2023,
-          "month": 8,
-          "date": 15,
-          "hour": 18,
-          "minute": 30
+            "year": "2023",
+            "month": "8",
+            "date": "15",
+            "hour": "18",
+            "minute": "30"
         }
       }
     ]
