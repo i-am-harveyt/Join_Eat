@@ -202,15 +202,15 @@
 | -------- | ------ | ----------- |
 | event_id | Number | Event's id  |
 
-- Request Body Example
+- Request Example
 
 `http://[HOST_NAME]/api/[API_VERSION]/events/10`
 
 - Success Response: 200
 
-| Field    | Type   | Description      |
-| -------- | ------ | ---------------- |
-| event_id | Object | User information |
+| Field    | Type   | Description          |
+| -------- | ------ | -------------------- |
+| event_id | Object | containes `event_id` |
 
 - Success Response Example:
 
@@ -218,7 +218,7 @@
 {
   "data": {
     "event": {
-      "event_id": 10
+      "event_id": "bdf460cd-9676-4cfe-88f7-5d1de488f3c2"
     }
   }
 }
@@ -327,9 +327,9 @@
 - Method: `POST`
 - Request Headers:
 
-| Field         | Type   | Description               |
-| ------------- | ------ | ------------------------- |
-| Authorization | String | Access token from server. |
+| Field         | Type   | Description                      |
+| ------------- | ------ | -------------------------------- |
+| Authorization | String | Access token preceding `Bearer`. |
 
 - Parameter
 
@@ -364,9 +364,9 @@
 - Method: `POST`
 - Request Headers:
 
-| Field         | Type   | Description               |
-| ------------- | ------ | ------------------------- |
-| Authorization | String | Access token from server. |
+| Field         | Type   | Description                                                   |
+| ------------- | ------ | ------------------------------------------------------------- |
+| Authorization | String | Access token preceding `Bearer` . For example: `Bearer token` |
 
 - Parameter
 
@@ -480,7 +480,7 @@
 ## Query Shop API
 
 - End Point: `/events/shop`
-- Method: `GET`
+- Method: `POST`
 - Request Header;
 
 | Field         | Type   | Description                                                   |
@@ -489,24 +489,26 @@
 
 - Request Parameters:
 
-| Field     | Type   | Description |
-| --------- | ------ | ----------- |
-| latitude  | Number | required    |
-| longitude | Number | required    |
+| Field     | Type   | Description              |
+| --------- | ------ | ------------------------ |
+| latitude  | Number | user latitude, required  |
+| longitude | Number | user longitude, required |
 
 - Request Example: `https://[HOST_NAME]/api/[API_VERSION]/events/shop?latitude=25.0388368&longitude=121.5325665`
 
-- Request Body:
+- Request body:
 
-| Field     | Type   | Description      |
-| --------- | ------ | ---------------- |
-| latitude  | Number | shop's latiude   |
-| longitude | Number | shop's longtiude |
+| Field     | Type   | Description    |
+| --------- | ------ | -------------- |
+| latitude  | Number | shop latitude  |
+| longitude | Number | shop longitude |
+
+- Request body example:
 
 ```json
 {
-  "latitude": 26.038846,
-  "longitude": 121.532598
+  "latitude": 25.0,
+  "longitude": 121.11111
 }
 ```
 
@@ -583,7 +585,7 @@
 | ------------- | ------ | ------------------------------------------------------------- |
 | Authorization | String | Access token preceding `Bearer` . For example: `Bearer token` |
 
-- Request Parameters:
+- Query Parameters:
 
 | Field     | Type   | Description |
 | --------- | ------ | ----------- |
@@ -672,9 +674,9 @@ Request Example: `http://[HOST_NAME]/api/[API_VERSION]/events/1?latitude=26.0288
       "user_id": "8ceb3d97-50e8-4a5c-8919-2b61bac02cb9",
       "name": "Test",
       "email": "test@test.com",
-      "picture": "some_url",
+      "picture": "https://joineat-com/static/8ceb3d97-50e8-4a5c-8919-2b61bac02cb9.png",
       "introduction": "hello",
-      "tags": "tags"
+      "tags": "Programming"
     }
   }
 }
@@ -705,6 +707,17 @@ Request Example: `http://[HOST_NAME]/api/[API_VERSION]/events/1?latitude=26.0288
 | ------- | ------ | ----------- |
 | user_id | Number | user's id   |
 
+- Query Parameters
+
+| Field     | Type   | Description      |
+| --------- | ------ | ---------------- |
+| latitude  | number | user's latitude  |
+| longitude | number | user's longitude |
+
+- Request example
+
+`http://localhost:3000/api/1.0/users/1111-11111-11111-11111/events?longitude=121&latitude=25`
+
 - Success Response Example
 
 ```json
@@ -718,6 +731,7 @@ Request Example: `http://[HOST_NAME]/api/[API_VERSION]/events/1?latitude=26.0288
         "shop_name": "某家麥當勞",
         "latitude": 25.0388368,
         "longitude": 121.5325665,
+        "is_public": 1,
         "people_limit": 6,
         "people_num": 6,
         "distance": 0.0,
@@ -736,6 +750,7 @@ Request Example: `http://[HOST_NAME]/api/[API_VERSION]/events/1?latitude=26.0288
         "shop_name": "麥當勞-台北濟南餐廳",
         "latitude": 25.0400737,
         "longitude": 121.53261,
+        "is_public": 0,
         "people_limit": 4,
         "people_num": 2,
         "distance": 502.3,
@@ -836,7 +851,7 @@ Request Example: `http://[HOST_NAME]/api/[API_VERSION]/events/1?latitude=26.0288
 ```json
 {
   "data": {
-    "picture": "http://joineat.com/static/user_id.png"
+    "picture": "http://joineat.com/static/8ceb3d97-50e8-4a5c-8919-2b61bac02cb9.png"
   }
 }
 ```
