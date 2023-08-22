@@ -480,7 +480,7 @@
 ## Query Shop API
 
 - End Point: `/events/shop`
-- Method: `GET`
+- Method: `POST`
 - Request Header;
 
 | Field         | Type   | Description                                                   |
@@ -489,12 +489,28 @@
 
 - Request Parameters:
 
-| Field     | Type   | Description |
-| --------- | ------ | ----------- |
-| latitude  | Number | required    |
-| longitude | Number | required    |
+| Field     | Type   | Description              |
+| --------- | ------ | ------------------------ |
+| latitude  | Number | user latitude, required  |
+| longitude | Number | user longitude, required |
 
 - Request Example: `https://[HOST_NAME]/api/[API_VERSION]/events/shop?latitude=25.0388368&longitude=121.5325665`
+
+- Request body:
+
+| Field     | Type   | Description    |
+| --------- | ------ | -------------- |
+| latitude  | Number | shop latitude  |
+| longitude | Number | shop longitude |
+
+- Request body example:
+
+```json
+{
+  "latitude": 25.0,
+  "longitude": 121.11111
+}
+```
 
 - Success Response: 200
 
@@ -693,10 +709,10 @@ Request Example: `http://[HOST_NAME]/api/[API_VERSION]/events/1?latitude=26.0288
 
 - Query Parameters
 
-| Field    | Type    | Description    |
-|---------------- | --------------- | --------------- |
-| latitude    | number    | user's latitude    |
-| longitude    | number    | user's longitude    |
+| Field     | Type   | Description      |
+| --------- | ------ | ---------------- |
+| latitude  | number | user's latitude  |
+| longitude | number | user's longitude |
 
 - Request example
 
