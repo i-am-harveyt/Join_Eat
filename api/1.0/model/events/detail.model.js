@@ -49,10 +49,10 @@ export default async function eventDetail(eventId, userId, longitude, latitude) 
     participantsData = participantResult;
     eventData = eventResult;
   } catch (err) {
-    db.releaseConnection();
+		conn.release();
     throw err;
   }
-  db.releaseConnection();
+	conn.release();
 	eventData[0].participants = participantsData;
   return eventData;
 }

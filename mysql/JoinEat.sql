@@ -41,7 +41,7 @@ FOREIGN KEY(`event_id`) REFERENCES `events`(`id`) ON DELETE CASCADE
 
 -- checking people limit may be exceed or not
 DELIMITER //
-CREATE TRIGGER check_people_limit
+CREATE TRIGGER IF NOT EXISTS check_people_limit
 BEFORE UPDATE ON events FOR EACH ROW
 BEGIN
 	IF NEW.people_joined > NEW.people_limit THEN
@@ -51,7 +51,7 @@ BEGIN
 END;
 //
 
-CREATE TRIGGER check_host_quit
+CREATE TRIGGER IF NOT EXISTS check_host_quit
 BEFORE DELETE ON participants FOR EACH ROW
 BEGIN
 	DECLARE event_host_id BINARY(16);
@@ -65,19 +65,19 @@ END
 //
 
 -- update people joined
-CREATE PROCEDURE UpdatePeopleJoined(event_id BINARY(16), increment INT)
+CREATE PROCEDURE IF NOT EXISTS UpdatePeopleJoined(event_id BINARY(16), increment INT)
 BEGIN
 	UPDATE events SET people_joined = people_joined + increment
 	WHERE id = event_id;
 END;
 //
-CREATE TRIGGER add_people_joined
+CREATE TRIGGER IF NOT EXISTS add_people_joined
 AFTER INSERT ON participants FOR EACH ROW
 BEGIN
 	CALL UpdatePeopleJoined(NEW.event_id, 1);
 END;
 //
-CREATE TRIGGER dec_people_joined
+CREATE TRIGGER IF NOT EXISTS dec_people_joined
 AFTER DELETE ON participants FOR EACH ROW
 BEGIN
 	CALL UpdatePeopleJoined(OLD.event_id, -1);
@@ -85,7 +85,7 @@ END;
 //
 
 -- check_expired_events
-CREATE EVENT check_expired_events
+CREATE EVENT IF NOT EXISTS check_expired_events
 ON SCHEDULE EVERY 1 MINUTE
 DO
   BEGIN

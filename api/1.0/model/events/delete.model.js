@@ -23,14 +23,14 @@ export default async function eventDelete(eventId, userId) {
 		const [result] = await conn.query(eventsQuery, eventsParams);
 		if (!result.affectedRows) {
 			await conn.rollback();
-			db.releaseConnection();
+			conn.release();
 			return false;
 		}
 		await conn.query(participantsQuery, participantsParams);
 		await conn.commit();
 	} catch (err) {
 		await conn.rollback();
-		db.releaseConnection();
+		conn.release();
 		throw err;
 	}
 	return true;
