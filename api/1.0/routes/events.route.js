@@ -19,8 +19,8 @@ events.post("/", isJSON, asyncWrapper(eventCreateHandler));
 events.get("/", asyncWrapper(rangeQueryHandler));
 events.get("/search", asyncWrapper(searchEventHandler));
 events.post("/shop", isJSON, asyncWrapper(rangeShopHandler));
-events.post("/:event_id/join", isJSON, asyncWrapper(eventJoinHandler));
-events.post("/:event_id/quit", isJSON, asyncWrapper(eventQuitHandler));
+events.post("/:event_id/join", asyncWrapper(eventJoinHandler));
+events.post("/:event_id/quit", asyncWrapper(eventQuitHandler));
 events.delete("/:event_id", asyncWrapper(eventDeleteHandler));
 events.get("/:event_id", asyncWrapper(eventDetailHandler));
 
