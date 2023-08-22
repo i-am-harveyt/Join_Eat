@@ -691,6 +691,17 @@ Request Example: `http://[HOST_NAME]/api/[API_VERSION]/events/1?latitude=26.0288
 | ------- | ------ | ----------- |
 | user_id | Number | user's id   |
 
+- Query Parameters
+
+| Field    | Type    | Description    |
+|---------------- | --------------- | --------------- |
+| latitude    | number    | user's latitude    |
+| longitude    | number    | user's longitude    |
+
+- Request example
+
+`http://localhost:3000/api/1.0/users/1111-11111-11111-11111/events?longitude=121&latitude=25`
+
 - Success Response Example
 
 ```json
