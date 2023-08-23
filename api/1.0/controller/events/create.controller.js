@@ -89,6 +89,7 @@ function checkBody(req) {
     appointment_time.minute,
   );
   const now = new Date();
+  now.setHours(now.getHours() + 8);
   if (now >= jsDate) return -1;
 
   return {
