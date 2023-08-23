@@ -1,0 +1,65 @@
+name: CI/CD JoinEat app
+
+on:
+  push:
+    branches: [main, develop, haoting_develop]
+
+permissions:
+  contents: write
+
+jobs:
+  # test:
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: Checkout Code
+  #       uses: actions/checkout@v3
+  #     - name: Extract branch name
+  #       shell: bash
+  #       run: echo "branch=${GITHUB_REF#refs/heads/}" >> $GITHUB_OUTPUT
+  #       id: extract_branch
+  #     - name: Run on test env
+  #       env:
+  #         BRANCH: ${{ steps.extract_branch.outputs.branch }}
+  #       run: |
+  #         cd students/hao-ting/Canchu/
+  #         git checkout $BRANCH
+  #         ls
+  #         echo "${{ secrets.ENV_VAR }}" > .env
+  #         sudo docker-compose down
+  #         sudo docker-compose --env-file .env up --build -d
+  #         sudo docker image prune -af
+  #         sudo docker logs canchu_express_app_1
+  #         sudo docker ps
+  #     - name: Run test
+  #       run: docker exec canchu_express_app_1 npm run test
+
+  deploy:
+    # needs: test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Extract branch name
+        shell: bash
+        run: echo "branch=${GITHUB_REF#refs/heads/}" >> $GITHUB_OUTPUT
+        id: extract_branch
+      - name: Deploy in EC2
+        uses: appleboy/ssh-action@master
+        env:
+          BRANCH: ${{ steps.extract_branch.outputs.branch }}
+        with:
+          key: ${{ secrets.AWS_PRIVATE_KEY  }}
+          host: ${{ secrets.HOSTNAME  }}
+          username: ${{ secrets.USERNAME  }}
+          envs: BRANCH
+          script: |
+            cd /home/ubuntu/Join_Eat
+            git pull origin $BRANCH
+            echo "Pull"
+            git switch $BRANCH
+            git status
+            echo "${{ secrets.ENV_VAR }}" > .env
+            mysql -h "${{ secrets.RDS_ENDPOINT }}" -u "${{ secrets.RDS_USER }}"  -p"${{ secrets.RDS_PWD }}" < mysql/JoinEat.sql
+            # npm install
+            pm2 restart main
+            # sudo docker-compose down
+            # sudo docker-compose --env-file .env up --build -d
+            # sudo docker image prune -af
