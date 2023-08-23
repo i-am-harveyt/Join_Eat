@@ -58,7 +58,8 @@ jobs:
             git status
             echo "${{ secrets.ENV_VAR }}" > .env
             mysql -h "${{ secrets.RDS_ENDPOINT }}" -u "${{ secrets.RDS_USER }}"  -p"${{ secrets.RDS_PWD }}" < mysql/JoinEat.sql
-            npm install
+            # npm install
+            pm2 restart main
             # sudo docker-compose down
             # sudo docker-compose --env-file .env up --build -d
             # sudo docker image prune -af
