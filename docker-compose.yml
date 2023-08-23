@@ -1,0 +1,13 @@
+version: '3.9'
+
+services:
+  joineat_app:
+    restart: always
+    image: 123r123/joineat_app
+    container_name: joineat-container
+    build: .
+    expose:
+      - "3000"
+    ports:
+      - "3000:3000"
+

@@ -2,7 +2,6 @@ import db from "../db.js";
 
 const rangeQuery = `
 SELECT BIN_TO_UUID(e.id) AS event_id, BIN_TO_UUID(e.host_id) AS host_id, e.is_public,
-       (SELECT picture FROM users WHERE users.id = e.host_id) AS picture,
        e.name, e.shop_name, e.latitude, e.longitude, e.people_limit, e.people_joined, e.appointment_time,
        Floor(ST_Distance_Sphere(POINT(?, ?), POINT(e.longitude, e.latitude))) AS distance,
        IFNULL(p.user_id IS NOT NULL, 0) AS is_joined
