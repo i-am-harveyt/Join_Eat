@@ -34,6 +34,12 @@ export default async function eventDetailHandler(req, res, next) {
 		}
 	}
 	data.appointment_time = transformTimeFormat(data.appointment_time);
+	data.participants.map(
+		(e) =>
+		(e.picture = e.picture
+			? `http://${process.env.JOINEAT_HOST}${e.picture}`
+			: null),
+	);
 
 	return res.status(200).json({ data });
 }
