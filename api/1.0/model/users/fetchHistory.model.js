@@ -15,7 +15,7 @@ add_user_attend AS (
 add_event_detail AS (
 	SELECT
 	BIN_TO_UUID(E.id) AS id,
-	? AS host_id,
+	BIN_TO_UUID(E.host_id) AS host_id,
 	CASE WHEN BIN_TO_UUID(A.user_attended) IS NULL THEN FALSE ELSE TRUE END AS is_joined,
 	Floor(ST_Distance_Sphere(POINT(?, ?), POINT(longitude, latitude))) AS distance,
 	E.name, E.shop_name, E.is_public,
@@ -45,7 +45,7 @@ export default async function fetchHistory(
 	longitude,
 	latitude,
 ) {
-	const params = [targetId, userId, targetId, longitude, latitude];
+	const params = [targetId, userId, longitude, latitude];
 	try {
 		return await db.execute(query, params);
 	} catch (err) {
