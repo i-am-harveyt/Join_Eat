@@ -45,7 +45,7 @@ export default async function fetchHistory(
 	longitude,
 	latitude,
 ) {
-	const params = [targetId, userId, targetId, longitude, latitude];
+	const params = [targetId, userId, longitude, latitude];
 	try {
 		return await db.execute(query, params);
 	} catch (err) {
