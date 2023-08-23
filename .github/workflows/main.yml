@@ -51,12 +51,16 @@ jobs:
           username: ${{ secrets.USERNAME  }}
           envs: BRANCH
           script: |
-            cd /home/ubuntu/JoinEat
-            git pull origin $BRANCH
-            git switch $BRANCH
-            echo "${{ secrets.ENV_VAR }}" > .env
-            mysql -h "${{ secrets.RDS_ENDPOINT }}" -u "${{ secrets.RDS_USER }}"  -p"${{ secrets.RDS_PWD }}" < mysql/JoinEat.sql
-            npm install
+            ls -la
+            echo "Landing"
+            # cd /home/ubuntu/JoinEat
+            # git pull origin $BRANCH
+            # echo "Pull"
+            # git switch $BRANCH
+            # git status
+            # echo "${{ secrets.ENV_VAR }}" > .env
+            # mysql -h "${{ secrets.RDS_ENDPOINT }}" -u "${{ secrets.RDS_USER }}"  -p"${{ secrets.RDS_PWD }}" < mysql/JoinEat.sql
+            # npm install
             # sudo docker-compose down
             # sudo docker-compose --env-file .env up --build -d
             # sudo docker image prune -af
